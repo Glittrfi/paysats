@@ -55,6 +55,7 @@ export interface HttpRuntime {
 export async function startHttp(env: AppEnv): Promise<HttpRuntime> {
   const app = express();
   app.disable("x-powered-by");
+  app.set("trust proxy", 1);
   app.use(cors({ origin: false }));
   app.use(express.json({ limit: "1mb" }));
 
@@ -132,6 +133,9 @@ export async function startHttp(env: AppEnv): Promise<HttpRuntime> {
     port: env.httpPort,
     path: MCP_PATH,
     allowedHosts: env.allowedHosts ?? "any",
+    publicMode: env.publicMode,
+    bearerAuth: env.httpToken ? "required" : "disabled",
+    rateLimitPerMinute: env.rateLimitPerMinute,
   });
 
   return {
