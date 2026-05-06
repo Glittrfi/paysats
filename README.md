@@ -177,22 +177,33 @@ First-party [Model Context Protocol](https://modelcontextprotocol.io) server tha
 
 Package: [`mcp/`](mcp/). Full reference: [`mcp/README.md`](mcp/README.md).
 
-**Build order (monorepo uses `file:../sdk`):**
+**Hosted (one line, no setup):**
+
+Add this to `.cursor/mcp.json`, Claude Desktop, or any MCP client that takes a remote URL — Claude web/mobile can use the same URL via "Add custom connector":
+
+```json
+{
+  "mcpServers": {
+    "paysats": { "url": "https://mcp.paysats.exchange/mcp" }
+  }
+}
+```
+
+No env vars, no headers, no command/args. All seven tools (including `create_offramp_order`, which returns a Lightning BOLT11 invoice) work immediately. Calls run against a held PaySats tenant key on the hosted side; per-IP rate limiting and a `Host` allowlist guard the endpoint.
+
+**Self-host alternatives:**
 
 ```bash
 cd sdk && npm install && npm run build
 cd ../mcp && npm install && npm run build
 ```
 
-**Three ways to run it:**
-
-- **Self-host (stdio)** — add to `~/.cursor/mcp.json` or Claude Desktop with `command: node`, `args: […/mcp/dist/index.js]`, and `PAYSATS_API_KEY` in `env` (see [`.cursor/mcp.json`](.cursor/mcp.json) for an example).
+- **stdio** — add to `~/.cursor/mcp.json` or Claude Desktop with `command: node`, `args: […/mcp/dist/index.js]`, and `PAYSATS_API_KEY` in `env` (see [`.cursor/mcp.json`](.cursor/mcp.json) for an example).
 - **One-click Railway** —
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template?template=https%3A%2F%2Fgithub.com%2FGlittrfi%2Fpaysats&envs=PAYSATS_API_KEY%2CPAYSATS_MCP_TRANSPORT%2CPAYSATS_MCP_HOST%2CPAYSATS_MCP_HTTP_TOKEN%2CPAYSATS_MCP_ALLOWED_HOSTS&PAYSATS_MCP_TRANSPORTDefault=http&PAYSATS_MCP_HOSTDefault=0.0.0.0&PAYSATS_API_KEYDesc=PaySats+tenant+API+key+%28pk_live_...%29&PAYSATS_MCP_HTTP_TOKENDesc=Strong+bearer+token+MCP+clients+must+send&PAYSATS_MCP_ALLOWED_HOSTSDesc=Comma-separated+Host+allowlist+%28optional%29) — the repo-root [`railway.json`](railway.json) pins the service to `mcp/Dockerfile` and `GET /healthz`.
-- **Docker (self-host)** — `docker build -f mcp/Dockerfile -t paysats-mcp .` from the repo root.
-- **PaySats-hosted** — same image operated by PaySats; customers only add the published HTTPS URL in their MCP client.
+- **Docker** — `docker build -f mcp/Dockerfile -t paysats-mcp .` from the repo root.
 
-Every HTTP deployment requires `Authorization: Bearer <PAYSATS_MCP_HTTP_TOKEN>`; there is no unauthenticated internet-facing mode.
+Self-hosted HTTP requires `Authorization: Bearer <PAYSATS_MCP_HTTP_TOKEN>` by default. Setting `PAYSATS_MCP_PUBLIC_MODE=true` opts a deployment into the same unauthenticated mode the hosted endpoint uses — anyone with the URL can hit your held tenant key, so combine with `PAYSATS_MCP_ALLOWED_HOSTS` and the per-IP rate limit.
 
 ---
 

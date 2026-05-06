@@ -31,6 +31,22 @@ The server ships a canonical `instructions` string so clients (Claude, ChatGPT-c
 
 Stdio writes all logs to **stderr** (stdout is the JSON-RPC channel). The HTTP transport exposes `POST /mcp` and a `GET /healthz` for health checks.
 
+## Hosted (one-line)
+
+The fastest way to use PaySats from any MCP client is the hosted endpoint:
+
+```json
+{
+  "mcpServers": {
+    "paysats": { "url": "https://mcp.paysats.exchange/mcp" }
+  }
+}
+```
+
+That config drops straight into `.cursor/mcp.json`, Claude Desktop, or any client that supports remote MCP URLs. Claude web/mobile users can paste the same URL into "Add custom connector". No `PAYSATS_API_KEY`, no bearer token, no command/args — all seven tools (including `create_offramp_order`, which returns a Lightning BOLT11 invoice) become available immediately.
+
+Calls run against a held PaySats tenant key on the server. Per-IP rate limiting and a `Host` allowlist guard the endpoint; for full isolation, self-host with your own `PAYSATS_API_KEY` instead.
+
 ## Environment variables
 
 | Variable | Required | Default | Notes |
@@ -42,7 +58,8 @@ Stdio writes all logs to **stderr** (stdout is the JSON-RPC channel). The HTTP t
 | `PAYSATS_MCP_HOST` | no | `127.0.0.1` | `0.0.0.0` for containers / Railway |
 | `PAYSATS_MCP_PORT` / `PORT` | no | `3333` | Railway sets `PORT` automatically |
 | `PAYSATS_MCP_ALLOWED_HOSTS` | no | any | Comma-separated allowlist for the `Host` header |
-| `PAYSATS_MCP_RATE_LIMIT_PER_MINUTE` | no | `60` | Per-bearer rate limit on `/mcp` |
+| `PAYSATS_MCP_RATE_LIMIT_PER_MINUTE` | no | `60` (`30` in public mode) | Per-bearer / per-IP rate limit on `/mcp` |
+| `PAYSATS_MCP_PUBLIC_MODE` | no | `false` | Drops the bearer-token requirement so the URL alone gives access. Anyone with the URL can call all tools (including `create_offramp_order`) using the held `PAYSATS_API_KEY`. Use only with a dedicated tenant + `PAYSATS_MCP_ALLOWED_HOSTS` + rate limiting. |
 | `PAYSATS_MCP_NAME` | no | `@paysats/mcp` | Server name advertised to clients |
 | `PAYSATS_MCP_LOG_LEVEL` | no | `info` | `debug` / `info` / `warn` / `error` |
 
@@ -116,7 +133,9 @@ docker run --rm -p 3333:3333 \
 
 ### 4. PaySats-hosted
 
-Same image operated by PaySats; customers add the published `https://mcp.paysats.io/mcp` URL in their MCP client. Multi-tenant OAuth on the MCP edge is a later addition; today every deployment uses a single tenant API key in env.
+Same code, operated by PaySats at `https://mcp.paysats.exchange/mcp`. Clients add the URL line shown in [Hosted (one-line)](#hosted-one-line); no `PAYSATS_API_KEY` or bearer needed — the hosted process holds a dedicated tenant key and runs in `PAYSATS_MCP_PUBLIC_MODE=true` behind nginx + Certbot, with per-IP rate limiting and a `Host` allowlist on `mcp.paysats.exchange`. Multi-tenant OAuth on the MCP edge is a later addition; today every deployment uses a single tenant API key in env.
+
+The systemd unit + nginx site that drive that hosted setup live in [`deploy/`](../deploy/) (`paysats-mcp.service`, `paysats-mcp.env.example`, `nginx-mcp.paysats.exchange.conf`) for anyone who wants to mirror it on their own VPS.
 
 ## Notes
 
