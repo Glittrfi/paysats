@@ -9,6 +9,7 @@ export interface AppEnv {
   httpToken: string | null;
   allowedHosts: string[] | null;
   rateLimitPerMinute: number;
+  publicMode: boolean;
   serverName: string;
   serverVersion: string;
 }
@@ -17,6 +18,12 @@ function readInt(value: string | undefined, fallback: number): number {
   if (!value) return fallback;
   const n = Number(value);
   return Number.isFinite(n) && n > 0 ? Math.floor(n) : fallback;
+}
+
+function parseBool(raw: string | undefined): boolean {
+  if (!raw) return false;
+  const v = raw.trim().toLowerCase();
+  return v === "1" || v === "true" || v === "yes" || v === "on";
 }
 
 function parseTransport(raw: string | undefined): Transport {
@@ -37,6 +44,7 @@ function parseHosts(raw: string | undefined): string[] | null {
 
 export function loadEnv(pkg: { name: string; version: string }): AppEnv {
   const transport = parseTransport(process.env.PAYSATS_MCP_TRANSPORT);
+  const publicMode = parseBool(process.env.PAYSATS_MCP_PUBLIC_MODE);
 
   const apiKey = (process.env.PAYSATS_API_KEY ?? "").trim();
   if (!apiKey) {
@@ -54,16 +62,17 @@ export function loadEnv(pkg: { name: string; version: string }): AppEnv {
   );
 
   const httpToken = (process.env.PAYSATS_MCP_HTTP_TOKEN ?? "").trim() || null;
-  if (transport === "http" && !httpToken) {
+  if (transport === "http" && !httpToken && !publicMode) {
     throw new Error(
-      "PAYSATS_MCP_HTTP_TOKEN is required when PAYSATS_MCP_TRANSPORT=http. Set a strong bearer token (e.g. `node -e \"console.log(require('crypto').randomBytes(32).toString('base64url'))\"`).",
+      "PAYSATS_MCP_HTTP_TOKEN is required when PAYSATS_MCP_TRANSPORT=http. Set a strong bearer token (e.g. `node -e \"console.log(require('crypto').randomBytes(32).toString('base64url'))\"`), or set PAYSATS_MCP_PUBLIC_MODE=true to expose an unauthenticated public endpoint.",
     );
   }
 
   const allowedHosts = parseHosts(process.env.PAYSATS_MCP_ALLOWED_HOSTS);
+  const rateLimitDefault = publicMode ? 30 : 60;
   const rateLimitPerMinute = readInt(
     process.env.PAYSATS_MCP_RATE_LIMIT_PER_MINUTE,
-    60,
+    rateLimitDefault,
   );
 
   const serverName = (process.env.PAYSATS_MCP_NAME ?? "").trim() || pkg.name;
@@ -77,6 +86,7 @@ export function loadEnv(pkg: { name: string; version: string }): AppEnv {
     httpToken,
     allowedHosts,
     rateLimitPerMinute,
+    publicMode,
     serverName,
     serverVersion: pkg.version,
   };
