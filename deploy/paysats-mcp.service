@@ -1,0 +1,24 @@
+[Unit]
+Description=PaySats public MCP server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/paysats/mcp.env
+WorkingDirectory=/home/vibhav/paysats/mcp
+ExecStart=/usr/bin/node /home/vibhav/paysats/mcp/dist/index.js
+Restart=on-failure
+RestartSec=3
+User=vibhav
+Group=vibhav
+# Logs go to journalctl; MCP logger writes JSON to stderr already.
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+ProtectSystem=strict
+PrivateTmp=true
+ReadWritePaths=/home/vibhav/paysats/mcp
+
+[Install]
+WantedBy=multi-user.target
