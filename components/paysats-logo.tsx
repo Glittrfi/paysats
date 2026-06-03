@@ -43,8 +43,8 @@ export function PaysatsLogo({ className = "", showWordmark = true }: Props) {
       </svg>
       {showWordmark ? (
         <span className="inline-flex items-baseline text-xl font-black tracking-tight sm:text-2xl">
-          <span className="text-gradient-gold">Pay</span>
-          <span className="text-white">sats</span>
+          <span className="text-gradient-logo">Pay</span>
+          <span className="text-paysats-text">sats</span>
         </span>
       ) : null}
     </span>

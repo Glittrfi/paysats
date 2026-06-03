@@ -24,7 +24,7 @@ export function InvoiceQrDisplay({ bolt11, amountSats, balanceSats, balanceMsat,
 
   return (
     <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-4">
-      <p className="text-center text-xs uppercase tracking-wide text-zinc-400">Pay this invoice</p>
+      <p className="text-center text-xs uppercase tracking-wide text-paysats-text-muted">Pay this invoice</p>
       {amountSats != null ? (
         <p className="text-lg font-bold text-gold">{amountSats.toLocaleString()} sats</p>
       ) : null}
@@ -34,20 +34,20 @@ export function InvoiceQrDisplay({ bolt11, amountSats, balanceSats, balanceMsat,
       <Button type="button" onClick={copy} className="border border-gold bg-transparent text-gold hover:bg-gold/10">
         {copied ? "Copied" : "Copy invoice"}
       </Button>
-      <p className="max-h-24 w-full overflow-y-auto break-all text-center text-[10px] leading-relaxed text-zinc-500">
+      <p className="max-h-24 w-full overflow-y-auto break-all text-center text-[10px] leading-relaxed text-paysats-text-muted">
         {bolt11}
       </p>
       {balanceSats != null ? (
-        <div className="text-center text-xs text-zinc-400">
-          <p className="font-medium text-zinc-300">Operator wallet (NWC_URL)</p>
-          {walletAlias ? <p className="text-zinc-500">{walletAlias}</p> : null}
+        <div className="text-center text-xs text-paysats-text-muted">
+          <p className="font-medium text-paysats-text">Operator wallet (NWC_URL)</p>
+          {walletAlias ? <p className="text-paysats-text-muted">{walletAlias}</p> : null}
           <p>
             Balance: {balanceSats.toLocaleString()} sats
             {balanceMsat != null ? (
-              <span className="text-zinc-500"> ({balanceMsat.toLocaleString()} msat raw)</span>
+              <span className="text-paysats-text-muted"> ({balanceMsat.toLocaleString()} msat raw)</span>
             ) : null}
           </p>
-          <p className="mt-1 text-[10px] text-zinc-500">
+          <p className="mt-1 text-[10px] text-paysats-text-muted">
             Same wallet that creates invoices and pays Boltz — read from NWC after connect.
           </p>
         </div>

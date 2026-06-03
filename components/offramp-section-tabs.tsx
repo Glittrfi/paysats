@@ -55,7 +55,9 @@ export function OfframpSectionTabs({ value, onChange, className = "" }: Props) {
               tabIndex={selected ? 0 : -1}
               onClick={() => onChange(t.id)}
               className={`tap-target min-h-[44px] shrink-0 rounded-xl px-3 py-2 text-sm font-bold transition ${
-                selected ? "gold-gradient text-black shadow-sm" : "text-zinc-400 hover:bg-black/20 hover:text-zinc-100"
+                selected
+                  ? "gold-gradient text-white shadow-sm"
+                  : "text-paysats-text-muted hover:bg-paysats-surface-muted hover:text-paysats-text"
               }`}
             >
               {t.label}

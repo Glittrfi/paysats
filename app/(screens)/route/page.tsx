@@ -129,12 +129,12 @@ function RoutePage() {
   return (
     <main className="app-shell">
       <h1 className="mb-2 text-2xl font-black text-gold">Review Route</h1>
-      <p className="mb-6 text-sm text-zinc-300">Confirm fees, fund the route wallet, then start the swap.</p>
+      <p className="mb-6 text-sm text-paysats-text">Confirm fees, fund the route wallet, then start the swap.</p>
       {depositRails?.bitcoinOnchain ? (
-        <section className="mb-6 rounded-2xl border border-border bg-card/60 p-4 text-sm text-zinc-400">
-          <h2 className="font-bold text-zinc-200">Receive options (settlement → IDRX burn)</h2>
+        <section className="mb-6 rounded-2xl border border-border bg-card/60 p-4 text-sm text-paysats-text-muted">
+          <h2 className="font-bold text-paysats-text">Receive options (settlement → IDRX burn)</h2>
           <p className="mt-2 leading-relaxed">
-            <span className="font-medium text-zinc-300">Bitcoin (raw on-chain):</span>{" "}
+            <span className="font-medium text-paysats-text">Bitcoin (raw on-chain):</span>{" "}
             {depositRails.bitcoinOnchain.summary}{" "}
             <a
               href={depositRails.bitcoinOnchain.wdkDocsUrl}
@@ -148,24 +148,24 @@ function RoutePage() {
           </p>
           {depositRails.baseCbbtc ? (
             <p className="mt-2 break-all leading-relaxed">
-              <span className="font-medium text-zinc-300">cbBTC (Base):</span> send to Safe{" "}
-              <code className="text-xs text-zinc-500">{depositRails.baseCbbtc.safeAddress}</code> — token{" "}
-              <code className="text-xs text-zinc-500">{depositRails.baseCbbtc.contractAddress}</code> (chain{" "}
+              <span className="font-medium text-paysats-text">cbBTC (Base):</span> send to Safe{" "}
+              <code className="text-xs text-paysats-text-muted">{depositRails.baseCbbtc.safeAddress}</code> — token{" "}
+              <code className="text-xs text-paysats-text-muted">{depositRails.baseCbbtc.contractAddress}</code> (chain{" "}
               {depositRails.baseCbbtc.chainId}). Operator runs LiFi → IDRX on Base, then burn/redeem.
             </p>
           ) : null}
           {depositRails.bscBtcb ? (
             <p className="mt-2 break-all leading-relaxed">
-              <span className="font-medium text-zinc-300">BTCB (BNB Chain):</span> send to Safe{" "}
-              <code className="text-xs text-zinc-500">{depositRails.bscBtcb.safeAddress}</code> — token{" "}
-              <code className="text-xs text-zinc-500">{depositRails.bscBtcb.contractAddress}</code> (chain{" "}
+              <span className="font-medium text-paysats-text">BTCB (BNB Chain):</span> send to Safe{" "}
+              <code className="text-xs text-paysats-text-muted">{depositRails.bscBtcb.safeAddress}</code> — token{" "}
+              <code className="text-xs text-paysats-text-muted">{depositRails.bscBtcb.contractAddress}</code> (chain{" "}
               {depositRails.bscBtcb.chainId}). LiFi routes to Base IDRX, then burn/redeem.
             </p>
           ) : null}
         </section>
       ) : null}
       {arbitrumSafe ? (
-        <p className="mb-4 break-all text-xs text-zinc-500">
+        <p className="mb-4 break-all text-xs text-paysats-text-muted">
           Boltz USDT receive (Arbitrum, WDK ERC-4337 Safe): {arbitrumSafe}
         </p>
       ) : null}
@@ -177,11 +177,11 @@ function RoutePage() {
         loading={loadingInvoice}
         confirmLabel="Create funding invoice"
       />
-      {flowError ? <p className="mt-3 text-sm text-red-400">{flowError}</p> : null}
+      {flowError ? <p className="mt-3 text-sm text-paysats-danger">{flowError}</p> : null}
 
       {fundingBolt11 ? (
         <div className="mt-6 space-y-4">
-          <p className="text-sm text-zinc-300">Pay this invoice to fund the backend wallet, then continue.</p>
+          <p className="text-sm text-paysats-text">Pay this invoice to fund the backend wallet, then continue.</p>
           <InvoiceQrDisplay
             bolt11={fundingBolt11}
             amountSats={satsAmount}
@@ -210,7 +210,7 @@ export default function RoutePageWithSuspense() {
     <Suspense
       fallback={
         <main className="app-shell">
-          <p className="text-sm text-zinc-400">Loading…</p>
+          <p className="text-sm text-paysats-text-muted">Loading…</p>
         </main>
       }
     >

@@ -5,12 +5,12 @@ export function OrderTimeline({ state }: { state: OrderState }) {
 
   return (
     <div className="rounded-2xl border border-border bg-card p-4">
-      <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-zinc-300">Order State</h3>
+      <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-paysats-text-muted">Order State</h3>
       <ul className="space-y-2 text-sm">
         {ORDER_STATES.map((step, index) => {
           const done = index <= currentIndex;
           return (
-            <li key={step} className={`flex items-center justify-between ${done ? "text-gold" : "text-zinc-500"}`}>
+            <li key={step} className={`flex items-center justify-between ${done ? "text-gold" : "text-paysats-text-muted"}`}>
               <span>{STATE_LABELS[step]}</span>
               <span>{done ? "✓" : "·"}</span>
             </li>

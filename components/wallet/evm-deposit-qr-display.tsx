@@ -47,14 +47,14 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-4">
-      <p className="text-center text-xs uppercase tracking-wide text-zinc-400">
+      <p className="text-center text-xs uppercase tracking-wide text-paysats-text-muted">
         Send {deposit.tokenSymbol}
       </p>
-      <p className="text-center text-sm text-zinc-300">
+      <p className="text-center text-sm text-paysats-text">
         {deposit.chainName} · chain {deposit.chainId}
       </p>
       {showAmountRow ? (
-        <p className="text-center text-sm text-zinc-300">
+        <p className="text-center text-sm text-paysats-text">
           {idrAmount != null && idrAmount > 0 ? (
             <>Order ≈ Rp {idrAmount.toLocaleString("id-ID")}</>
           ) : null}
@@ -64,7 +64,7 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
               {isWrappedBtcDeposit ? (
                 <>
                   ≈ {formatSatsAsBtc(satAmount)} BTC
-                  <span className="text-zinc-500">
+                  <span className="text-paysats-text-muted">
                     {" "}
                     ({satAmount.toLocaleString("id-ID")} sats)
                   </span>
@@ -79,8 +79,8 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
       <div className="rounded-xl bg-white p-3">
         <QRCode value={deposit.qrValue} size={220} level="M" />
       </div>
-      <p className="text-center text-[11px] text-zinc-500">
-        QR encodes <span className="font-mono text-zinc-400">{deposit.qrValue}</span> — wallet
+      <p className="text-center text-[11px] text-paysats-text-muted">
+        QR encodes <span className="font-mono text-paysats-text-muted">{deposit.qrValue}</span> — wallet
         opens send to this Safe on the correct network.
       </p>
       <Button
@@ -91,13 +91,13 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
         {copied === "qr" ? "Copied" : "Copy QR payload"}
       </Button>
 
-      <div className="w-full space-y-2 rounded-xl border border-border bg-black/20 p-3 text-left">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">Safe (receive)</p>
-        <p className="break-all font-mono text-[11px] text-zinc-300">{deposit.toAddress}</p>
+      <div className="w-full space-y-2 rounded-xl border border-border bg-paysats-surface-muted p-3 text-left">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-paysats-text-muted">Safe (receive)</p>
+        <p className="break-all font-mono text-[11px] text-paysats-text">{deposit.toAddress}</p>
         <Button
           type="button"
           onClick={() => copy("addr", deposit.toAddress)}
-          className="w-full border border-border bg-transparent text-xs text-zinc-200"
+          className="w-full border border-border bg-transparent text-xs text-paysats-text"
         >
           {copied === "addr" ? "Copied" : "Copy address"}
         </Button>
@@ -113,13 +113,13 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
         ) : null}
       </div>
 
-      <div className="w-full space-y-2 rounded-xl border border-border bg-black/20 p-3 text-left">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">Token contract</p>
-        <p className="break-all font-mono text-[11px] text-zinc-300">{deposit.tokenAddress}</p>
+      <div className="w-full space-y-2 rounded-xl border border-border bg-paysats-surface-muted p-3 text-left">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-paysats-text-muted">Token contract</p>
+        <p className="break-all font-mono text-[11px] text-paysats-text">{deposit.tokenAddress}</p>
         <Button
           type="button"
           onClick={() => copy("token", deposit.tokenAddress)}
-          className="w-full border border-border bg-transparent text-xs text-zinc-200"
+          className="w-full border border-border bg-transparent text-xs text-paysats-text"
         >
           {copied === "token" ? "Copied" : "Copy token contract"}
         </Button>
@@ -135,7 +135,7 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
         ) : null}
       </div>
 
-      <p className="text-center text-[11px] leading-relaxed text-zinc-500">
+      <p className="text-center text-[11px] leading-relaxed text-paysats-text-muted">
         Send the token (not ETH/BNB for gas) to the Safe above. Keep a little USDC (Base) or USDT (BNB) in the
         Safe for ERC-4337 gas when the operator runs LiFi → Base IDRX.
       </p>

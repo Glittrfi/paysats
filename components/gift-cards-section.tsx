@@ -17,10 +17,10 @@ export function GiftCardsSection({ className = "mt-12" }: Props) {
     <section className={className} aria-labelledby="gift-cards-heading">
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 id="gift-cards-heading" className="text-lg font-black text-white">
+          <h2 id="gift-cards-heading" className="text-lg font-black text-paysats-text">
             Gift cards & e-vouchers
           </h2>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-zinc-400">
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-paysats-text-muted">
             Top brands for everyday life in Indonesia: marketplaces, travel, mobility, and daily retail. Pay with LN when
             this catalog goes live.
           </p>

@@ -79,10 +79,10 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
       <LiquidityPlatformBanner />
 
       <div className="pt-4">
-        <h2 className="text-lg font-black text-white">IDRX liquidity & volume</h2>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+        <h2 className="text-lg font-black text-paysats-text">IDRX liquidity & volume</h2>
+        <p className="mt-2 text-sm leading-relaxed text-paysats-text-muted">
           Aggregated DEX pools where{" "}
-          <span className="inline-flex items-center gap-1 align-middle font-semibold text-zinc-300">
+          <span className="inline-flex items-center gap-1 align-middle font-semibold text-paysats-text">
             <IdrxMark size={18} alt="" />
             IDRX
           </span>{" "}
@@ -92,13 +92,13 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-border bg-card/60 px-4 py-10 text-center text-sm text-zinc-400">
+        <div className="rounded-2xl border border-border bg-card/60 px-4 py-10 text-center text-sm text-paysats-text-muted">
           Loading pool data…
         </div>
       ) : null}
 
       {error && !loading ? (
-        <div className="rounded-2xl border border-red-500/40 bg-red-950/30 px-4 py-4 text-sm text-red-300">
+        <div className="rounded-2xl border border-paysats-danger/40 bg-paysats-surface px-4 py-4 text-sm text-paysats-danger shadow-card">
           {error}
           <button
             type="button"
@@ -113,13 +113,13 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
       {data && !loading ? (
         <>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs text-paysats-text-muted">
               Updated {formatFetchedAt(data.fetchedAt)}
             </p>
             <button
               type="button"
               onClick={() => void load()}
-              className="tap-target rounded-lg border border-border bg-black/20 px-3 py-2 text-xs font-bold text-zinc-300 hover:border-gold/50 hover:text-zinc-100"
+              className="tap-target rounded-lg border border-border bg-paysats-surface-muted px-3 py-2 text-xs font-bold text-paysats-text hover:border-gold/50 hover:text-paysats-text"
             >
               Refresh
             </button>
@@ -131,42 +131,42 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
                 key={ch.chainId}
                 className="overflow-hidden rounded-2xl border border-border bg-card/80"
               >
-                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-black/20 px-4 py-3">
-                  <p className="text-base font-black text-zinc-100">{ch.label}</p>
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-400">
+                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-paysats-surface-muted px-4 py-3">
+                  <p className="text-base font-black text-paysats-text">{ch.label}</p>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-paysats-text-muted">
                     <span>
-                      <span className="text-zinc-500">Liquidity </span>
-                      <span className="font-bold text-zinc-200">
+                      <span className="text-paysats-text-muted">Liquidity </span>
+                      <span className="font-bold text-paysats-text">
                         {formatUsd(ch.totalLiquidityUsd)}
                       </span>
                     </span>
                     <span>
-                      <span className="text-zinc-500">24h vol </span>
-                      <span className="font-bold text-zinc-200">
+                      <span className="text-paysats-text-muted">24h vol </span>
+                      <span className="font-bold text-paysats-text">
                         {formatUsd(ch.totalVolumeH24Usd)}
                       </span>
                     </span>
                   </div>
                 </div>
                 {ch.pools.length === 0 ? (
-                  <p className="px-4 py-4 text-sm text-zinc-500">No indexed pools for this network.</p>
+                  <p className="px-4 py-4 text-sm text-paysats-text-muted">No indexed pools for this network.</p>
                 ) : (
                   <ul className="divide-y divide-border">
                     {ch.pools.map((p, i) => (
                       <li key={`${ch.chainId}-${p.dexId}-${i}`} className="px-4 py-3">
                         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                           <div>
-                            <p className="text-sm font-bold capitalize text-zinc-200">{p.dexId}</p>
-                            <p className="text-xs text-zinc-500">{p.pairLabel}</p>
+                            <p className="text-sm font-bold capitalize text-paysats-text">{p.dexId}</p>
+                            <p className="text-xs text-paysats-text-muted">{p.pairLabel}</p>
                           </div>
                           <div className="flex flex-wrap gap-x-4 text-xs">
-                            <span className="text-zinc-500">
+                            <span className="text-paysats-text-muted">
                               Liq{" "}
-                              <span className="font-semibold text-zinc-300">{formatUsd(p.liquidityUsd)}</span>
+                              <span className="font-semibold text-paysats-text">{formatUsd(p.liquidityUsd)}</span>
                             </span>
-                            <span className="text-zinc-500">
+                            <span className="text-paysats-text-muted">
                               24h{" "}
-                              <span className="font-semibold text-zinc-300">{formatUsd(p.volumeH24Usd)}</span>
+                              <span className="font-semibold text-paysats-text">{formatUsd(p.volumeH24Usd)}</span>
                             </span>
                             {p.url ? (
                               <a
@@ -188,7 +188,7 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
             ))}
           </div>
 
-          <p className="text-[11px] leading-relaxed text-zinc-600">
+          <p className="text-[11px] leading-relaxed text-paysats-text-faint">
             Pool figures are third-party estimates (DexScreener). They reflect indexed pairs only and
             can differ from on-chain reserves.
           </p>

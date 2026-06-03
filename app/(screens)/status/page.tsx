@@ -37,7 +37,7 @@ function StatusPage() {
 
   return (
     <main className="app-shell space-y-4">
-      <h1 className="mb-3 text-2xl font-black text-white">Order status</h1>
+      <h1 className="mb-3 text-2xl font-black text-paysats-text">Order status</h1>
       <ProgressBar state={state} />
       <OfframpRouteExpandable order={order} />
       <OrderTimeline state={state} />

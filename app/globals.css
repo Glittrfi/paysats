@@ -3,12 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0a0a0a;
-  --fg: #ffffff;
-  --gold: #ffd700;
-  --orange: #f7931a;
-  --card: #121212;
-  --border: #222222;
+  /* Brand palette — warm cream, rich ink, terracotta gradient accent */
+  --paysats-bg: #f7f3ef;
+  --paysats-surface: #ffffff;
+  --paysats-surface-muted: #f0ebe5;
+  --paysats-border: #e8e2dc;
+  --paysats-text: #161210;
+  --paysats-text-muted: #7a7168;
+  --paysats-text-faint: #b8b0a6;
+  --paysats-line: #e8e2dc;
+  --paysats-accent: #b85c38;
+  --paysats-accent-muted: #d08850;
+  --paysats-accent-soft: rgba(184, 92, 56, 0.06);
+  --paysats-success: #2da84e;
+  --paysats-success-soft: rgba(45, 168, 78, 0.07);
+  --paysats-warning: #cc9a0a;
+  --paysats-warning-soft: rgba(204, 154, 10, 0.08);
+  --paysats-danger: #c43030;
+  --paysats-gradient: linear-gradient(140deg, #be6640 0%, #d08850 55%, #dca060 100%);
+  --paysats-gradient-hero: linear-gradient(
+    140deg, #a84e2e, #be6640, #cc7d48, #d89255, #dca060, #cc7d48, #be6640, #a84e2e
+  );
+  --paysats-shadow-card: 0 1px 3px rgba(22, 18, 16, 0.04);
+  --paysats-shadow-hero: 0 10px 40px rgba(170, 80, 40, 0.22);
+  --paysats-shadow-tile: 0 6px 20px rgba(170, 80, 40, 0.25);
+  --radius-card: 18px;
+  --radius-pill: 14px;
+  --radius-control: 12px;
 }
 
 html,
@@ -17,8 +38,8 @@ body {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--paysats-bg);
+  color: var(--paysats-text);
 }
 
 * {
@@ -27,7 +48,10 @@ body {
 
 body {
   min-height: 100vh;
-  font-family: "Segoe UI", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
 }
 
 @layer utilities {
@@ -35,17 +59,29 @@ body {
     min-height: 48px;
   }
 
+  /* Primary terracotta gradient (buttons, accent surfaces) */
   .gold-gradient {
-    background: linear-gradient(120deg, var(--gold), var(--orange));
+    background: var(--paysats-gradient);
+  }
+
+  /* Shared accent text gradient (terracotta) — repointed from the old gold. */
+  .text-gradient-gold {
+    display: inline-block;
+    background-image: var(--paysats-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /**
-   * Gradient fill for text (wordmark “Pay”). Use instead of gold-gradient + bg-clip-text — that combo often breaks on
-   * iOS Safari and shows a solid gradient box instead of letter shapes.
+   * Logo-only gold gradient. Kept separate from `.text-gradient-gold` so the
+   * PaySats wordmark keeps its original gold while the rest of the UI moves to
+   * terracotta.
    */
-  .text-gradient-gold {
+  .text-gradient-logo {
     display: inline-block;
-    background-image: linear-gradient(120deg, var(--gold), var(--orange));
+    background-image: linear-gradient(120deg, #ffd700, #f7931a);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -59,4 +95,66 @@ body {
     padding: 1rem;
     padding-bottom: 4rem;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ===== Motion primitives ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+@keyframes grad-move {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15px, -20px) scale(1.05); }
+  66% { transform: translate(-10px, 15px) scale(0.95); }
+}
+@keyframes tile-in {
+  from { opacity: 0; transform: scale(0.82); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 3s ease-in-out infinite; }
+.animate-fade-rise { animation: fade-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Global press effect */
+[data-pressable],
+[role="button"],
+button {
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+[data-pressable]:active,
+[role="button"]:active,
+button:not(:disabled):active {
+  transform: scale(0.97);
+  opacity: 0.85;
 }

@@ -28,16 +28,16 @@ type Props = { className?: string };
 export function HowItWorks({ className = "mt-12" }: Props) {
   return (
     <section className={className} aria-labelledby="how-it-works-heading">
-      <h2 id="how-it-works-heading" className="text-lg font-black text-white">
+      <h2 id="how-it-works-heading" className="text-lg font-black text-paysats-text">
         How it works
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+      <p className="mt-2 text-sm leading-relaxed text-paysats-text-muted">
         Paysats connects LN to IDR (bank and e-wallet) — no manual exchange.
       </p>
-      <div className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-zinc-500">
+      <div className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-paysats-text-muted">
         <TetherMark size={22} className="mt-0.5" />
         <p>
-          <span className="font-medium text-zinc-400">Powered by Tether:</span> WDK settles the USDT leg; agents route
+          <span className="font-medium text-paysats-text">Powered by Tether:</span> WDK settles the USDT leg; agents route
           Boltz → LiFi → your payout.
         </p>
       </div>
@@ -48,14 +48,14 @@ export function HowItWorks({ className = "mt-12" }: Props) {
             className="flex gap-4 rounded-2xl border border-border bg-card/80 p-4"
           >
             <span
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl gold-gradient text-sm font-black text-black"
-              aria-hidden
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl gold-gradient text-sm font-black text-white"
+            aria-hidden
             >
               {s.step}
             </span>
             <div className="min-w-0">
-              <h3 className="font-bold text-zinc-100">{s.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-zinc-400">{s.body}</p>
+              <h3 className="font-bold text-paysats-text">{s.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-paysats-text-muted">{s.body}</p>
             </div>
           </li>
         ))}

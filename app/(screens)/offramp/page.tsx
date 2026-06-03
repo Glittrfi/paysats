@@ -18,6 +18,7 @@ import { TetherMark } from "@/components/tether-mark";
 import { backendFetch } from "@/lib/backend-fetch";
 import { formatSatsAsBtc } from "@/lib/format-sats-btc";
 import { isIdrxEwalletBankCode } from "@/lib/idrx-payout-classify";
+import { SAVE_IN_BITCOIN_URL } from "@/lib/links";
 
 type IdrxMethodRow = {
   bankCode: string;
@@ -358,23 +359,39 @@ export default function OfframpPage() {
   return (
     <main className="mx-auto w-full max-w-lg px-4 pb-16 pt-2">
       <div className="mb-6">
-        <h1 className="text-2xl font-black leading-tight text-white">
-          Sats in. Rupiah out.
+        <h1 className="text-[2rem] font-extrabold leading-[1.05] tracking-tight text-paysats-text">
+          Sats in.{" "}
+          <span className="text-gradient-gold">Rupiah out.</span>
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+        <p className="mt-3 text-sm leading-relaxed text-paysats-text-muted">
           Settle BTC over Lightning: sats in on the invoice, rupiah out to your
           rail. Pay the LN invoice; we route
           liquidity via stablecoins, then{" "}
-          <span className="mx-0.5 inline-flex items-center gap-1 align-middle font-semibold text-zinc-300">
+          <span className="mx-0.5 inline-flex items-center gap-1 align-middle font-semibold text-paysats-text">
             <IdrxMark size={22} alt="" />
             IDRX
           </span>{" "}
           burn and redeem to the bank or e-wallet you pick below.
         </p>
-        <div className="mt-3 flex items-start gap-2.5 text-xs leading-relaxed text-zinc-500">
+
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <a
+            href={SAVE_IN_BITCOIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="tap-target gold-gradient inline-flex items-center justify-center rounded-pill px-5 py-3 text-sm font-bold text-white shadow-tile transition"
+          >
+            Save in Bitcoin
+          </a>
+          <span className="text-xs text-paysats-text-muted">
+            Open the PaySats savings app →
+          </span>
+        </div>
+
+        <div className="mt-4 flex items-start gap-2.5 rounded-card border border-paysats-border bg-paysats-surface p-3 text-xs leading-relaxed text-paysats-text-muted shadow-card">
           <TetherMark size={24} className="mt-0.5" />
           <p>
-            <span className="font-semibold text-zinc-400">
+            <span className="font-semibold text-paysats-text">
               Powered by Tether.
             </span>{" "}
             Merchant-side settlement uses Tether WDK with USDT on-chain; agent
@@ -384,7 +401,7 @@ export default function OfframpPage() {
               Your order route shows{" "}
               <span className="inline-flex items-center gap-1">
                 <IdrxMark size={16} alt="" className="translate-y-px" />
-                <span className="font-semibold text-zinc-400">IDRX</span>
+                <span className="font-semibold text-paysats-text">IDRX</span>
               </span>{" "}
               → Rupiah on your selected rail.
             </span>
@@ -402,7 +419,7 @@ export default function OfframpPage() {
         <div className="space-y-4">
           <div className="rounded-2xl border border-border bg-card p-4">
             <div className="flex items-center justify-between">
-              <p className="text-xs uppercase tracking-wide text-zinc-400">
+              <p className="text-xs uppercase tracking-wide text-paysats-text-muted">
                 Sats in / Rupiah out
               </p>
               <div className="flex items-center gap-2">
@@ -416,7 +433,7 @@ export default function OfframpPage() {
                     className={`tap-target rounded-full border px-4 py-3 text-sm font-extrabold uppercase tracking-wide ${
                       primaryCurrency === "idr"
                         ? "border-gold text-gold"
-                        : "border-border text-zinc-300"
+                        : "border-border text-paysats-text"
                     }`}
                   >
                     IDR
@@ -430,7 +447,7 @@ export default function OfframpPage() {
                     className={`tap-target rounded-full border px-4 py-3 text-sm font-extrabold uppercase tracking-wide ${
                       primaryCurrency === "sats"
                         ? "border-gold text-gold"
-                        : "border-border text-zinc-300"
+                        : "border-border text-paysats-text"
                     }`}
                   >
                     SATS
@@ -444,7 +461,7 @@ export default function OfframpPage() {
                     setActiveCurrency(next);
                     setLastEdited(next);
                   }}
-                  className="tap-target grid place-items-center rounded-full border border-border bg-transparent px-4 py-3 text-zinc-200"
+                  className="tap-target grid place-items-center rounded-full border border-border bg-transparent px-4 py-3 text-paysats-text"
                 >
                   {/* up/down swap icon */}
                   <svg
@@ -473,10 +490,10 @@ export default function OfframpPage() {
               </div>
             </div>
 
-            <div className="mt-5 rounded-xl border border-border bg-black/15 p-3">
+            <div className="mt-5 rounded-xl border border-border bg-paysats-surface-muted p-3">
               <label
                 htmlFor="offramp-funding-source"
-                className="text-xs font-medium text-zinc-500"
+                className="text-xs font-medium text-paysats-text-muted"
               >
                 Pay with
               </label>
@@ -486,7 +503,7 @@ export default function OfframpPage() {
                 onChange={(e) =>
                   setFundingSource(e.target.value as FundingSource)
                 }
-                className="tap-target mt-2 w-full appearance-none rounded-xl border border-border bg-card px-4 py-3 text-sm font-bold text-white outline-none focus:border-gold"
+                className="tap-target mt-2 w-full appearance-none rounded-xl border border-border bg-card px-4 py-3 text-sm font-bold text-paysats-text outline-none focus:border-gold"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
                   backgroundRepeat: "no-repeat",
@@ -501,7 +518,7 @@ export default function OfframpPage() {
                 <option value="cbbtc">cbBTC on Base — send to WDK Safe</option>
                 <option value="btcb">BTCB on BNB Chain — send to WDK Safe</option>
               </select>
-              <p className="mt-2 text-[11px] leading-relaxed text-zinc-500">
+              <p className="mt-2 text-[11px] leading-relaxed text-paysats-text-muted">
                 {fundingSource === "lightning"
                   ? "LN invoice QR on the next step."
                   : fundingSource === "cbbtc"
@@ -523,14 +540,14 @@ export default function OfframpPage() {
                     if (primaryCurrency === "idr") setIdr(v);
                     else setSats(v);
                   }}
-                  className="w-[12ch] bg-transparent text-center text-6xl font-black tracking-tight text-zinc-100 outline-none"
+                  className="w-[12ch] bg-transparent text-center text-6xl font-black tracking-tight text-paysats-text outline-none"
                   aria-label={`${primaryCurrency === "idr" ? "IDR" : "SATS"} amount`}
                 />
-                <span className="hidden text-xl font-extrabold tracking-wide text-zinc-300 md:inline">
+                <span className="hidden text-xl font-extrabold tracking-wide text-paysats-text md:inline">
                   {primaryLabel}
                 </span>
               </div>
-              <div className="text-sm text-zinc-400">
+              <div className="text-sm text-paysats-text-muted">
                 {secondaryPreview ? (
                   <span>{secondaryPreview}</span>
                 ) : (
@@ -541,11 +558,11 @@ export default function OfframpPage() {
 
             <button
               type="button"
-              className="tap-target mt-6 flex w-full items-center justify-between rounded-2xl border border-border bg-black/20 px-4 py-4 text-left"
+              className="tap-target mt-6 flex w-full items-center justify-between rounded-2xl border border-border bg-paysats-surface-muted px-4 py-4 text-left"
             >
               <div className="flex items-center gap-3">
                 {/* wallet icon */}
-                <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-black/30 text-zinc-200">
+                <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-paysats-surface-muted text-paysats-text">
                   <svg
                     width="18"
                     height="18"
@@ -574,34 +591,34 @@ export default function OfframpPage() {
                   </svg>
                 </span>
                 <div className="leading-tight">
-                  <p className="text-sm font-semibold text-zinc-300">
+                  <p className="text-sm font-semibold text-paysats-text">
                     Per-order limit
                   </p>
-                  <p className="text-sm font-black text-zinc-100">
+                  <p className="text-sm font-black text-paysats-text">
                     <span className="text-gold">100</span> USDC
                   </p>
                   {btcIdr && usdcIdr ? (
-                    <p className="mt-0.5 text-xs text-zinc-400">
+                    <p className="mt-0.5 text-xs text-paysats-text-muted">
                       ≈ {formatIdr(Math.ceil(((100 * usdcIdr) / btcIdr) * 1e8))}{" "}
                       sats in
                     </p>
                   ) : null}
                 </div>
               </div>
-              <span className="text-xl font-black text-zinc-400">{">"}</span>
+              <span className="text-xl font-black text-paysats-text-muted">{">"}</span>
             </button>
 
-            <div className="mt-6 text-center text-xs text-zinc-500">
+            <div className="mt-6 text-center text-xs text-paysats-text-muted">
               {btcIdr ? (
                 <p>
                   1 BTC ≈{" "}
-                  <span className="text-zinc-300">
+                  <span className="text-paysats-text">
                     {formatIdr(Math.round(btcIdr))} rupiah out (spot)
                   </span>
                 </p>
               ) : null}
               {quoteError ? (
-                <p className="mt-1 text-red-400">{quoteError}</p>
+                <p className="mt-1 text-paysats-danger">{quoteError}</p>
               ) : null}
               <p className="mt-1">
                 Rupiah out is covered by rounding sats in up on the invoice so
@@ -611,7 +628,7 @@ export default function OfframpPage() {
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="mb-3 text-xs uppercase tracking-wide text-zinc-400">
+            <p className="mb-3 text-xs uppercase tracking-wide text-paysats-text-muted">
               Rupiah out — destination
             </p>
 
@@ -622,7 +639,7 @@ export default function OfframpPage() {
                 className={`tap-target rounded-xl border px-3 py-2 text-sm font-bold ${
                   payoutRailTab === "bank"
                     ? "border-gold text-gold"
-                    : "border-border text-zinc-300"
+                    : "border-border text-paysats-text"
                 }`}
               >
                 BANK
@@ -633,7 +650,7 @@ export default function OfframpPage() {
                 className={`tap-target rounded-xl border px-3 py-2 text-sm font-bold ${
                   payoutRailTab === "ewallet"
                     ? "border-gold text-gold"
-                    : "border-border text-zinc-300"
+                    : "border-border text-paysats-text"
                 }`}
               >
                 E-Wallets
@@ -646,7 +663,7 @@ export default function OfframpPage() {
                   ? "offramp-bank-rail"
                   : "offramp-ewallet-rail"
               }
-              className="mt-4 block text-xs font-medium text-zinc-500"
+              className="mt-4 block text-xs font-medium text-paysats-text-muted"
             >
               {payoutRailTab === "bank"
                 ? "Bank (IDRX list)"
@@ -667,7 +684,7 @@ export default function OfframpPage() {
                   ? !bankMethods.length
                   : !ewalletMethods.length)
               }
-              className="tap-target mt-2 w-full appearance-none rounded-xl border border-border bg-card px-4 py-3 text-sm font-bold text-white outline-none focus:border-gold disabled:opacity-50"
+              className="tap-target mt-2 w-full appearance-none rounded-xl border border-border bg-card px-4 py-3 text-sm font-bold text-paysats-text outline-none focus:border-gold disabled:opacity-50"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
                 backgroundRepeat: "no-repeat",
@@ -685,25 +702,25 @@ export default function OfframpPage() {
               )}
             </select>
             {payoutRailTab === "ewallet" && !ewalletMethods.length ? (
-              <p className="mt-2 text-xs text-amber-400">
+              <p className="mt-2 text-xs text-paysats-warning">
                 No supported e-wallets returned from IDRX for this environment.
               </p>
             ) : null}
             {idrxMethodsError ? (
-              <p className="mt-2 text-xs text-red-400">{idrxMethodsError}</p>
+              <p className="mt-2 text-xs text-paysats-danger">{idrxMethodsError}</p>
             ) : null}
 
-            <div className="mt-3 flex items-start gap-2.5 text-xs leading-relaxed text-zinc-500">
+            <div className="mt-3 flex items-start gap-2.5 text-xs leading-relaxed text-paysats-text-muted">
               <IdrxMark size={20} alt="" className="mt-0.5 shrink-0" />
               <p>
-                <span className="font-semibold text-zinc-400">IDRX</span> —
+                <span className="font-semibold text-paysats-text-muted">IDRX</span> —
                 {payoutIsEwallet
                   ? " LinkAja, IMKAS, OVO, GoPay, DANA, ShopeePay, and LinkAja Direct — enter the mobile number registered on that wallet (+CC-NNN…)."
                   : " Pick your bank (BCA first in the list). Settlement is IDRX liquidation to Rupiah on your account number."}
               </p>
             </div>
 
-            <label className="mt-4 block text-sm font-semibold text-zinc-300">
+            <label className="mt-4 block text-sm font-semibold text-paysats-text">
               {payoutIsEwallet
                 ? "E-wallet mobile number"
                 : "Bank account number"}
@@ -719,25 +736,25 @@ export default function OfframpPage() {
                 }
                 value={recipient}
                 onChange={(e) => setRecipient(e.target.value)}
-                className="tap-target w-full rounded-xl border border-border bg-card px-4 py-3 text-lg font-bold text-white outline-none focus:border-gold"
+                className="tap-target w-full rounded-xl border border-border bg-card px-4 py-3 text-lg font-bold text-paysats-text outline-none focus:border-gold"
               />
               <button
                 type="button"
                 onClick={() => router.push("/scan")}
-                className="tap-target whitespace-nowrap rounded-xl border border-border bg-transparent px-3 py-3 text-sm font-bold text-zinc-200"
+                className="tap-target whitespace-nowrap rounded-xl border border-border bg-transparent px-3 py-3 text-sm font-bold text-paysats-text"
               >
                 Scan QR
               </button>
             </div>
             {!recipientValid && recipient ? (
-              <p className="mt-2 text-xs text-red-400">
+              <p className="mt-2 text-xs text-paysats-danger">
                 {payoutIsEwallet
                   ? "Enter your e-wallet number in +CC-NNN… format."
                   : "Enter a valid bank account number (digits)."}
               </p>
             ) : null}
 
-            <p className="mt-2 text-xs text-zinc-500">
+            <p className="mt-2 text-xs text-paysats-text-muted">
               Need to read a merchant QRIS first? Use Scan — your payout rail
               is still the BANK or E-Wallet you selected above.
             </p>
@@ -754,7 +771,7 @@ export default function OfframpPage() {
               ? `Pay (${selectedIdrxMethod.bankName})`
               : "Pay"}
           </Button>
-          {error ? <p className="text-sm text-red-400">{error}</p> : null}
+          {error ? <p className="text-sm text-paysats-danger">{error}</p> : null}
         </div>
       ) : null}
 
@@ -766,9 +783,9 @@ export default function OfframpPage() {
       ) : null}
 
       {section === "pay" || section === "liquidity" ? (
-        <footer className="mt-12 border-t border-border pt-6 text-center text-xs leading-relaxed text-zinc-600">
+        <footer className="mt-12 border-t border-border pt-6 text-center text-xs leading-relaxed text-paysats-text-faint">
           Paysats — Lightning settlement for Indonesia
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-zinc-500">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-paysats-text-muted">
             <TetherMark size={18} />
             <span>Powered by Tether · WDK · Boltz · LiFi</span>
           </div>

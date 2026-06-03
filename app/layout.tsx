@@ -1,6 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-plus-jakarta-sans"
+});
 
 export const metadata: Metadata = {
   title: "Paysats — Sats in, Rupiah out",
@@ -18,7 +25,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Paysats",
-    statusBarStyle: "black-translucent"
+    statusBarStyle: "default"
   }
 };
 
@@ -26,13 +33,13 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0A0A0A"
+  themeColor: "#f7f3ef"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-bg text-white antialiased">
+    <html lang="en" className={plusJakartaSans.variable}>
+      <body className="min-h-screen bg-paysats-bg text-paysats-text antialiased">
         <SiteHeader />
         {children}
       </body>

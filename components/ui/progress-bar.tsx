@@ -6,11 +6,11 @@ export function ProgressBar({ state }: { state: OrderState }) {
 
   return (
     <div className="mb-4 w-full">
-      <div className="mb-2 flex items-center justify-between text-xs text-zinc-400">
+      <div className="mb-2 flex items-center justify-between text-xs text-paysats-text-muted">
         <span>Progress</span>
         <span>{Math.round(percentage)}%</span>
       </div>
-      <div className="h-2 rounded-full bg-zinc-900">
+      <div className="h-2 rounded-full bg-paysats-surface-muted">
         <div className="gold-gradient h-2 rounded-full" style={{ width: `${percentage}%` }} />
       </div>
     </div>

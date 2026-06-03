@@ -6,8 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Paysats",
     start_url: "/offramp",
     display: "standalone",
-    background_color: "#0A0A0A",
-    theme_color: "#0A0A0A",
+    background_color: "#f7f3ef",
+    theme_color: "#f7f3ef",
     description: "Lightning payments to IDR — bank and e-wallet payout.",
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },

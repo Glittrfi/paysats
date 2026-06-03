@@ -54,7 +54,7 @@ export function InvoiceFundForm() {
   return (
     <div className="space-y-6">
       <form className="space-y-4" onSubmit={onSubmit}>
-        <label className="block text-sm font-semibold text-zinc-300">Amount (sats)</label>
+        <label className="block text-sm font-semibold text-paysats-text">Amount (sats)</label>
         <input
           type="number"
           min={1}
@@ -63,12 +63,12 @@ export function InvoiceFundForm() {
           enterKeyHint="done"
           value={amountSats}
           onChange={(e) => setAmountSats(e.target.value)}
-          className="tap-target w-full rounded-xl border border-border bg-card px-4 py-3 text-lg font-bold text-white outline-none focus:border-gold"
+          className="tap-target w-full rounded-xl border border-border bg-card px-4 py-3 text-lg font-bold text-paysats-text outline-none focus:border-gold"
         />
         <Button type="submit" loading={loading} className="gold-gradient">
           Create invoice
         </Button>
-        {error ? <p className="text-sm text-red-400">{error}</p> : null}
+        {error ? <p className="text-sm text-paysats-danger">{error}</p> : null}
       </form>
 
       {bolt11 ? (
@@ -83,7 +83,7 @@ export function InvoiceFundForm() {
           <Button
             type="button"
             onClick={() => router.push("/scan")}
-            className="border border-zinc-600 bg-transparent text-white"
+            className="border border-paysats-border bg-transparent text-paysats-text"
           >
             Continue to QRIS scan
           </Button>

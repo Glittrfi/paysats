@@ -209,7 +209,7 @@ function OrderPage() {
   if (!orderId) {
     return (
       <main className="app-shell space-y-4">
-        <p className="text-sm text-red-400">No order ID provided.</p>
+        <p className="text-sm text-paysats-danger">No order ID provided.</p>
       </main>
     );
   }
@@ -217,7 +217,7 @@ function OrderPage() {
   if (loading) {
     return (
       <main className="app-shell space-y-4">
-        <p className="text-sm text-zinc-400">Loading order…</p>
+        <p className="text-sm text-paysats-text-muted">Loading order…</p>
       </main>
     );
   }
@@ -225,7 +225,7 @@ function OrderPage() {
   if (!orderDetail) {
     return (
       <main className="app-shell space-y-4">
-        <p className="text-sm text-red-400">Order not found.</p>
+        <p className="text-sm text-paysats-danger">Order not found.</p>
       </main>
     );
   }
@@ -237,7 +237,7 @@ function OrderPage() {
     <main className="mx-auto w-full max-w-md px-4 pb-16 pt-6">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-bold text-zinc-200">
+          <p className="text-sm font-bold text-paysats-text">
             {isDeposit && depositInfo
               ? `Deposit ${depositInfo.tokenSymbol} (${depositInfo.chainName})`
               : "Pay with Lightning"}
@@ -245,7 +245,7 @@ function OrderPage() {
           <button
             type="button"
             onClick={() => router.push("/offramp")}
-            className="tap-target rounded-lg px-3 py-2 text-sm font-bold text-zinc-300 hover:text-white"
+            className="tap-target rounded-lg px-3 py-2 text-sm font-bold text-paysats-text hover:text-paysats-text"
           >
             Back
           </button>
@@ -253,10 +253,10 @@ function OrderPage() {
 
         {pipelineFailed ? (
           <div className="space-y-4 py-2 text-center">
-            <p className="text-sm font-bold text-red-400">
+            <p className="text-sm font-bold text-paysats-danger">
               Something went wrong
             </p>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-paysats-text-muted">
               The order did not complete. You can view details on the status
               page or contact support with your order ID.
             </p>
@@ -304,10 +304,10 @@ function OrderPage() {
                 </svg>
               </div>
               <div>
-                <p className="text-xl font-black text-zinc-100">
+                <p className="text-xl font-black text-paysats-text">
                   Payment successful
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                <p className="mt-2 text-sm leading-relaxed text-paysats-text-muted">
                   Lightning payment and on-chain swap are complete
                   {orderDetail?.state === "COMPLETED"
                     ? " — redirecting to receipt…"
@@ -329,7 +329,7 @@ function OrderPage() {
                   href={paymentProofHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm font-bold text-zinc-400 underline hover:text-gold"
+                  className="block text-sm font-bold text-paysats-text-muted underline hover:text-gold"
                 >
                   Lightning payment proof
                 </a>
@@ -344,7 +344,7 @@ function OrderPage() {
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="border border-border bg-transparent text-zinc-200"
+                className="border border-border bg-transparent text-paysats-text"
               >
                 Order details
               </Button>
@@ -353,22 +353,22 @@ function OrderPage() {
             <div className="space-y-5 py-4 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center">
                 <div
-                  className="h-14 w-14 rounded-full border-4 border-zinc-700 border-t-gold animate-spin"
+                  className="h-14 w-14 rounded-full border-4 border-paysats-border border-t-gold animate-spin"
                   aria-hidden
                 />
               </div>
               <div className="space-y-2">
-                <p className="text-base font-black text-zinc-100">
+                <p className="text-base font-black text-paysats-text">
                   Settling your payout
                 </p>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-paysats-text-muted">
                   Your Lightning payment is in. Routing to rupiah out usually takes{" "}
-                  <span className="font-semibold text-zinc-300">
+                  <span className="font-semibold text-paysats-text">
                     about one to two minutes
                   </span>
                   .
                 </p>
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-paysats-text-muted">
                   Funds move through automated swaps and payout partners
                   (Boltz, LiFi, IDRX) in the background.
                   {orderDetail?.idrxPayoutBankName
@@ -386,7 +386,7 @@ function OrderPage() {
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="tap-target w-full rounded-xl px-4 py-3 text-sm font-bold text-zinc-400 transition hover:text-zinc-200"
+                className="tap-target w-full rounded-xl px-4 py-3 text-sm font-bold text-paysats-text-muted transition hover:text-paysats-text"
               >
                 Detailed progress
               </button>
@@ -400,14 +400,14 @@ function OrderPage() {
                   Lightning payment proof (validate-payment.com)
                 </a>
               ) : (
-                <p className="text-center text-[11px] text-zinc-500">
+                <p className="text-center text-[11px] text-paysats-text-muted">
                   Paid with another wallet? Copy the preimage from your
                   wallet and verify at{" "}
                   <a
                     href="https://validate-payment.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-zinc-400 underline hover:text-gold"
+                    className="font-semibold text-paysats-text-muted underline hover:text-gold"
                   >
                     validate-payment.com
                   </a>
@@ -453,7 +453,7 @@ function OrderPage() {
                   href={paymentProofHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="tap-target flex w-full items-center justify-center rounded-xl border border-gold/40 bg-black/20 px-4 py-3 text-sm font-bold text-gold"
+                  className="tap-target flex w-full items-center justify-center rounded-xl border border-gold/40 bg-paysats-surface-muted px-4 py-3 text-sm font-bold text-gold"
                 >
                   Open payment proof
                 </a>
@@ -469,18 +469,18 @@ function OrderPage() {
               >
                 View status
               </Button>
-              <p className="text-center text-xs text-zinc-500">
+              <p className="text-center text-xs text-paysats-text-muted">
                 After the invoice is paid, settlement runs automatically:
                 Lightning → stablecoins → rupiah out to your account.
               </p>
               {!paymentProofHref ? (
-                <p className="text-center text-[11px] text-zinc-500">
+                <p className="text-center text-[11px] text-paysats-text-muted">
                   After paying in any wallet, you can prove the payment at{" "}
                   <a
                     href="https://validate-payment.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-zinc-400 underline hover:text-gold"
+                    className="font-semibold text-paysats-text-muted underline hover:text-gold"
                   >
                     validate-payment.com
                   </a>{" "}
@@ -511,7 +511,7 @@ function OrderPage() {
               >
                 View status
               </Button>
-              <p className="text-center text-xs text-zinc-500">
+              <p className="text-center text-xs text-paysats-text-muted">
                 After your on-chain deposit confirms, the operator route runs
                 LiFi → Base IDRX, then burn/redeem to your payout destination.
               </p>
@@ -521,13 +521,13 @@ function OrderPage() {
             </div>
           </>
         ) : (
-          <p className="text-center text-sm text-red-400">
+          <p className="text-center text-sm text-paysats-danger">
             Missing deposit instructions. The order may still be initializing — it will appear shortly.
           </p>
         )}
 
         {error ? (
-          <p className="text-center text-sm text-red-400">{error}</p>
+          <p className="text-center text-sm text-paysats-danger">{error}</p>
         ) : null}
       </div>
     </main>

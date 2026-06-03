@@ -26,15 +26,15 @@ export function QrisScanner() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-zinc-300">Camera scanner can be mounted with @zxing/browser. Paste sample payload to test flow now.</p>
+      <p className="text-sm text-paysats-text">Camera scanner can be mounted with @zxing/browser. Paste sample payload to test flow now.</p>
       <textarea
-        className="h-40 w-full rounded-xl border border-border bg-card p-3 text-white"
+        className="h-40 w-full rounded-xl border border-border bg-card p-3 text-paysats-text"
         placeholder="Paste QRIS EMV payload"
         value={payload}
         onChange={(e) => setPayload(e.target.value)}
       />
       <Button className="gold-gradient" onClick={onDecode}>Decode QRIS</Button>
-      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      {error ? <p className="text-sm text-paysats-danger">{error}</p> : null}
     </div>
   );
 }
