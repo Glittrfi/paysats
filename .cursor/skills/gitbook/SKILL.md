@@ -36,7 +36,7 @@ docs/
 * **Developer hub:** `docs/developers/overview.md` (not `developers/README.md`).
 * **No em dashes** in copy; use colons, commas, or rephrase.
 * **Product framing:** BNB Chain primitives (DCA, borrowing, bank settlement). Lightning/Tether detail stays in `integrations/tether-lightning.md`.
-* **Live vs roadmap:** Only bank settlement (IDR) is live; label DCA, borrowing, x402, and new markets as roadmap/planned.
+* **Live primitives:** Agentic DCA, BTC-backed borrowing, and bank settlement (IDR) are live. Do not label DCA or borrowing as roadmap. New markets (PHP/VND/THB/INR) and x402 remain planned where relevant.
 
 ## Before editing
 

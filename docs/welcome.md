@@ -29,15 +29,15 @@ Southeast Asian fiat bleeds slowly against the dollar. BTC and dollar stablecoin
 
 | Primitive | Summary | Status |
 |-----------|---------|--------|
-| **Agentic DCA into BTC** | Recurring / agent-driven exit from local currency into BTC on BNB | Roadmap |
-| **BTC-backed borrowing** | Collateralize BTC; borrow IDR stablecoins (IDRX) | Roadmap |
+| **Agentic DCA into BTC** | Recurring / agent-driven exit from local currency into BTC on BNB | **Live** |
+| **BTC-backed borrowing** | Collateralize BTC; borrow IDR stablecoins (IDRX) | **Live** |
 | **Bank settlement** | Wallet ↔ bank / e-wallet through licensed redeem partners | **Live (IDR)** |
 
 Full detail: [Product primitives](introduction/primitives.md).
 
 ## Where to next
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Why PaySats</strong></td><td>SEA currency bleed, P2P risk, and the case for trusted programmatic settlement.</td><td><a href="introduction/why-paysats.md">why-paysats.md</a></td></tr><tr><td><strong>Product primitives</strong></td><td>DCA, borrowing, and bank settlement on BNB Chain: live vs roadmap.</td><td><a href="introduction/primitives.md">primitives.md</a></td></tr><tr><td><strong>Settlement quickstart</strong></td><td>Your first IDR bank settlement in five steps using the SDK.</td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>MCP server</strong></td><td>Agent last-mile settlement: quote, list rails, create orders.</td><td><a href="developers/mcp-server.md">mcp-server.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Why PaySats</strong></td><td>SEA currency bleed, P2P risk, and the case for trusted programmatic settlement.</td><td><a href="introduction/why-paysats.md">why-paysats.md</a></td></tr><tr><td><strong>Product primitives</strong></td><td>DCA, borrowing, and bank settlement on BNB Chain.</td><td><a href="introduction/primitives.md">primitives.md</a></td></tr><tr><td><strong>Settlement quickstart</strong></td><td>Your first IDR bank settlement in five steps using the SDK.</td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>MCP server</strong></td><td>Agent last-mile settlement: quote, list rails, create orders.</td><td><a href="developers/mcp-server.md">mcp-server.md</a></td></tr></tbody></table>
 
 ## What PaySats does, in one picture
 
@@ -51,8 +51,8 @@ flowchart TB
   agents[AI agents MCP / x402] --> primitives
   settle --> idr[IDR live]
   settle --> sea[PHP VND THB INR next]
-  dca -.->|roadmap| borrow
-  borrow -.->|roadmap| settle
+  dca --> borrow
+  borrow --> settle
 ```
 
 **Live settlement path (today):**
@@ -72,7 +72,7 @@ PaySats exposes **three integration surfaces** for the **settlement primitive**:
 ## Current status
 
 {% hint style="warning" %}
-**Beta.** **Bank settlement (IDR)** is production-ready. **Agentic DCA** and **BTC-backed borrowing** are on the roadmap. **QRIS ↔ IDRX** and **gift-card** flows are actively being wired. See [Supported rails](introduction/supported-rails.md) and [Product primitives](introduction/primitives.md).
+**Beta.** **Agentic DCA**, **BTC-backed borrowing**, and **bank settlement (IDR)** are production-ready. **QRIS ↔ IDRX** and **gift-card** flows are actively being wired. See [Supported rails](introduction/supported-rails.md) and [Product primitives](introduction/primitives.md).
 {% endhint %}
 
 Need access? Ping us on Telegram at [@vibcrypto](https://t.me/vibcrypto) to request a tenant API key, or email <code class="expression">space.vars.support_email</code>.

@@ -9,7 +9,7 @@ icon: shield-halved
 
 Fiat in Southeast Asia is in a slow bleed against the dollar. **IDR**, **PHP**, **VND**, and **THB** are structurally weaker over time, while **BTC** and dollar stablecoins like **USDC** preserve purchasing power. PaySats exists so users and AI agents can **DCA out of local currency**, **borrow against BTC collateral**, and **settle into named bank accounts**, programmatically, with an audit trail.
 
-Moving value between **Bitcoin** and **local fiat** today is still mostly informal P2P, manual CEX withdrawals, and inbound transfers from strangers. Every step is a risk. PaySats replaces that with three **BNB Chain primitives**. Only **bank settlement** is live today; DCA and borrowing are on the roadmap. See [Product primitives](primitives.md).
+Moving value between **Bitcoin** and **local fiat** today is still mostly informal P2P, manual CEX withdrawals, and inbound transfers from strangers. Every step is a risk. PaySats replaces that with three **BNB Chain primitives**: agentic DCA, BTC-backed borrowing, and bank settlement. See [Product primitives](primitives.md).
 
 The concrete scam and freeze examples below come from our first live market (**Indonesia, IDR**). The same patterns show up across **PHP**, **VND**, **THB**, and **INR** as we expand.
 
@@ -82,7 +82,7 @@ A merchant or agent moving BTC to local fiat has no consistent way to prove whic
 * **One `orderId`** ties deposit, on-chain swaps, stablecoin redeem, and final bank / e-wallet credit.
 * **Live quote** locked at order creation.
 * **MCP** for AI agents to quote, list rails, and create settlement orders today.
-* **DCA and borrowing (roadmap):** programmatic BTC accumulation and IDRX borrow against collateral on BNB Chain.
+* **DCA and borrowing:** programmatic BTC accumulation and IDRX borrow against collateral on BNB Chain.
 * Lightning / USDT legs documented under [Tether Lightning rails](../integrations/tether-lightning.md).
 {% endcolumn %}
 {% endcolumns %}

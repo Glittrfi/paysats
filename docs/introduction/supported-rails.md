@@ -7,15 +7,15 @@ icon: route
 
 # Supported rails
 
-Rails power the **bank settlement** primitive today. **DCA** and **BTC-backed borrowing** will reuse overlapping on-chain infrastructure on **BNB Chain** as those primitives ship.
+Rails power all three primitives on **BNB Chain**. **Bank settlement** has the fullest API surface today; **DCA** and **BTC-backed borrowing** use the same on-chain infrastructure.
 
 ## Primitive coverage
 
 | Primitive | Live rails today | Notes |
 |-----------|------------------|-------|
 | **Bank settlement** | Lightning, cbBTC (Base), BTCB (BNB) → IDR banks / e-wallets | Full API + MCP |
-| **Agentic DCA into BTC** | BTCB on BNB (deposit only) | Swap / schedule API not shipped |
-| **BTC-backed borrowing** | (none yet) | Planned on BNB Chain |
+| **Agentic DCA into BTC** | BTCB on BNB, MCP agent triggers | Recurring / agent-driven swaps into BTC |
+| **BTC-backed borrowing** | BTCB on BNB collateral → IDRX | Borrow against BTC collateral on BNB Chain |
 
 ## Markets
 

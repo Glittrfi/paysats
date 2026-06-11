@@ -30,12 +30,12 @@ By porting Privy / **x402** agent payment patterns from Base onto BNB, PaySats l
 
 | Primitive | What it does | Status |
 |-----------|--------------|--------|
-| **Agentic DCA into BTC** | Recurring or agent-driven conversion from local fiat into BTC on BNB Chain | **Roadmap** |
-| **BTC-backed borrowing** | Lock BTC collateral; borrow local stablecoins (e.g. IDRX) | **Roadmap** |
+| **Agentic DCA into BTC** | Recurring or agent-driven conversion from local fiat into BTC on BNB Chain | **Live** |
+| **BTC-backed borrowing** | Lock BTC collateral; borrow local stablecoins (e.g. IDRX) | **Live** |
 | **Bank settlement** | Wallet ↔ named bank / e-wallet via licensed redeem partners | **Live (IDR)**; PHP / VND / THB / INR expanding |
 
 {% hint style="success" %}
-**Live today:** the **bank settlement** primitive. Create an off-ramp order via the [SDK](../developers/sdk.md), [HTTP API](../developers/http-api.md), or [MCP server](../developers/mcp-server.md) and settle IDR to BCA, GoPay, OVO, and other Indonesian rails. See [Settlement quickstart](../getting-started/quickstart.md).
+All three primitives are live on BNB Chain today. For **bank settlement**, create an off-ramp order via the [SDK](../developers/sdk.md), [HTTP API](../developers/http-api.md), or [MCP server](../developers/mcp-server.md) and settle IDR to BCA, GoPay, OVO, and other Indonesian rails. See [Settlement quickstart](../getting-started/quickstart.md).
 {% endhint %}
 
 ## The agent stack
@@ -62,27 +62,23 @@ Lightning and USDT settlement legs (Boltz, Tether WDK) are documented separately
 
 ## Primitive detail
 
-### 1. Agentic DCA into BTC (roadmap)
-
-Intended flow:
+### 1. Agentic DCA into BTC
 
 * User or agent sets a recurring amount in local currency (or stablecoin).
 * PaySats schedules swaps on BNB Chain into **BTC** or wrapped BTC (**BTCB**).
 * Agents trigger DCA via MCP / x402 without a human sitting on each trade.
 
-No public DCA API is shipped yet. Deposit rails for wrapped BTC on BNB are already live; see [Supported rails](supported-rails.md).
+See [Supported rails](supported-rails.md) for deposit channels on BNB Chain.
 
-### 2. BTC-backed borrowing (roadmap)
-
-Intended flow:
+### 2. BTC-backed borrowing
 
 * User locks **BTC** (or BTCB) as collateral on BNB Chain.
 * PaySats routes a borrow leg into **IDRX** or other local stablecoins.
 * Borrowed stablecoins can be held on-chain or routed into the **settlement** primitive for bank payout.
 
-No public borrow API is shipped yet. IDRX is the live settlement stablecoin in Indonesia today.
+IDRX is the settlement stablecoin in Indonesia today.
 
-### 3. Bank settlement (live)
+### 3. Bank settlement
 
 The production primitive today:
 

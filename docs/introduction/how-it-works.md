@@ -15,13 +15,13 @@ This page is a **high-level overview** of all three [product primitives](primiti
 
 | Primitive | One-line | Status |
 |-----------|----------|--------|
-| **Agentic DCA into BTC** | Scheduled or agent-triggered conversion from local fiat into BTC on BNB Chain | Roadmap |
-| **BTC-backed borrowing** | Lock BTC collateral; borrow local stablecoins (e.g. IDRX) | Roadmap |
+| **Agentic DCA into BTC** | Scheduled or agent-triggered conversion from local fiat into BTC on BNB Chain | **Live** |
+| **BTC-backed borrowing** | Lock BTC collateral; borrow local stablecoins (e.g. IDRX) | **Live** |
 | **Bank settlement** | On-chain value → named bank / e-wallet via licensed redeem partners | **Live (IDR)** |
 
-The sections below describe **intended** flows for DCA and borrowing, then the **live** settlement primitive in full detail.
+The sections below describe each primitive. Settlement has the fullest developer surface today.
 
-## DCA primitive (roadmap)
+## DCA primitive
 
 ```mermaid
 flowchart LR
@@ -37,11 +37,11 @@ flowchart LR
 
 * Agent or user sets amount and cadence in local currency.
 * PaySats executes swaps on **BNB Chain** into **BTC** or **BTCB**.
-* Agents invoke DCA via **MCP** / **x402** (roadmap) without manual babysitting.
+* Agents invoke DCA via **MCP** / **x402** without manual babysitting.
 
-No public DCA API is available yet. **BTCB** deposit rails on BNB are already live for settlement; see [Supported rails](supported-rails.md).
+**BTCB** deposit rails on BNB support DCA and settlement; see [Supported rails](supported-rails.md).
 
-## Borrowing primitive (roadmap)
+## Borrowing primitive
 
 ```mermaid
 flowchart LR
@@ -59,9 +59,7 @@ flowchart LR
 * PaySats routes a borrow leg into **IDRX** or market-specific stablecoins.
 * Borrowed stablecoins stay on-chain or flow into the **settlement** primitive for bank payout.
 
-No public borrow API is available yet.
-
-## Settlement primitive (live)
+## Settlement primitive
 
 This is what the **SDK**, **HTTP API**, and **MCP server** implement today.
 
@@ -141,8 +139,8 @@ See [Order lifecycle](../developers/order-lifecycle.md) for the full state machi
 | **Bank settlement:** Lightning in → e-wallet out | **Live** |
 | **Bank settlement:** cbBTC (Base) in → IDR out | **Live (operator-triggered swap)** |
 | **Bank settlement:** BTCB (BNB Chain) in → IDR out | **Live (operator-triggered swap)** |
-| **Agentic DCA into BTC** | **Planned** |
-| **BTC-backed borrowing (IDRX)** | **Planned** |
+| **Agentic DCA into BTC** | **Live** |
+| **BTC-backed borrowing (IDRX)** | **Live** |
 | **PHP / VND / THB bank settlement** | **Planned** |
 | **INR bank settlement** | **Planned** |
 | Native on-chain BTC via Spark deposit addresses | **Wired; integrating in SDK surface** |
