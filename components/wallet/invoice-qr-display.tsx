@@ -23,15 +23,15 @@ export function InvoiceQrDisplay({ bolt11, amountSats, balanceSats, balanceMsat,
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-4">
+    <div className="flex flex-col items-center gap-4 rounded-card border border-paysats-border bg-paysats-surface p-4 shadow-card">
       <p className="text-center text-xs uppercase tracking-wide text-paysats-text-muted">Pay this invoice</p>
       {amountSats != null ? (
-        <p className="text-lg font-bold text-gold">{amountSats.toLocaleString()} sats</p>
+        <p className="text-lg font-bold text-paysats-accent">{amountSats.toLocaleString()} sats</p>
       ) : null}
-      <div className="rounded-xl bg-white p-3">
+      <div className="rounded-control bg-white p-3">
         <QRCode value={bolt11} size={220} level="M" />
       </div>
-      <Button type="button" onClick={copy} className="border border-gold bg-transparent text-gold hover:bg-gold/10">
+      <Button type="button" onClick={copy} className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10">
         {copied ? "Copied" : "Copy invoice"}
       </Button>
       <p className="max-h-24 w-full overflow-y-auto break-all text-center text-[10px] leading-relaxed text-paysats-text-muted">

@@ -92,18 +92,18 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-border bg-card/60 px-4 py-10 text-center text-sm text-paysats-text-muted">
+        <div className="rounded-card border border-paysats-border bg-paysats-surface px-4 py-10 text-center text-sm text-paysats-text-muted shadow-card">
           Loading pool data…
         </div>
       ) : null}
 
       {error && !loading ? (
-        <div className="rounded-2xl border border-paysats-danger/40 bg-paysats-surface px-4 py-4 text-sm text-paysats-danger shadow-card">
+        <div className="rounded-card border border-paysats-danger/40 bg-paysats-surface px-4 py-4 text-sm text-paysats-danger shadow-card">
           {error}
           <button
             type="button"
             onClick={() => void load()}
-            className="ml-3 font-bold text-gold underline underline-offset-2"
+            className="ml-3 font-bold text-paysats-accent underline underline-offset-2"
           >
             Retry
           </button>
@@ -119,7 +119,7 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
             <button
               type="button"
               onClick={() => void load()}
-              className="tap-target rounded-lg border border-border bg-paysats-surface-muted px-3 py-2 text-xs font-bold text-paysats-text hover:border-gold/50 hover:text-paysats-text"
+              className="tap-target rounded-control border border-paysats-border bg-paysats-surface-muted px-3 py-2 text-xs font-bold text-paysats-text transition hover:border-paysats-accent/50 hover:text-paysats-accent"
             >
               Refresh
             </button>
@@ -129,9 +129,9 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
             {data.chains.map((ch) => (
               <div
                 key={ch.chainId}
-                className="overflow-hidden rounded-2xl border border-border bg-card/80"
+                className="overflow-hidden rounded-card border border-paysats-border bg-paysats-surface shadow-card"
               >
-                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-paysats-surface-muted px-4 py-3">
+                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-paysats-border bg-paysats-surface-muted px-4 py-3">
                   <p className="text-base font-black text-paysats-text">{ch.label}</p>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-paysats-text-muted">
                     <span>
@@ -151,7 +151,7 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
                 {ch.pools.length === 0 ? (
                   <p className="px-4 py-4 text-sm text-paysats-text-muted">No indexed pools for this network.</p>
                 ) : (
-                  <ul className="divide-y divide-border">
+                  <ul className="divide-y divide-paysats-line">
                     {ch.pools.map((p, i) => (
                       <li key={`${ch.chainId}-${p.dexId}-${i}`} className="px-4 py-3">
                         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -173,7 +173,7 @@ export function IdrxLiquiditySection({ className = "" }: { className?: string })
                                 href={p.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-bold text-gold underline underline-offset-2"
+                                className="font-bold text-paysats-accent underline underline-offset-2"
                               >
                                 Chart
                               </a>

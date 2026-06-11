@@ -45,10 +45,10 @@ export function HowItWorks({ className = "mt-12" }: Props) {
         {STEPS.map((s) => (
           <li
             key={s.step}
-            className="flex gap-4 rounded-2xl border border-border bg-card/80 p-4"
+            className="flex gap-4 rounded-card border border-paysats-border bg-paysats-surface p-4 shadow-card"
           >
             <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl gold-gradient text-sm font-black text-white"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-control gold-gradient text-sm font-black text-white"
             aria-hidden
             >
               {s.step}

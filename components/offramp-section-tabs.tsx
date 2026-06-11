@@ -37,7 +37,7 @@ type Props = {
 export function OfframpSectionTabs({ value, onChange, className = "" }: Props) {
   return (
     <nav
-      className={`rounded-2xl border border-border bg-card/60 p-1.5 ${className}`}
+      className={`rounded-card border border-paysats-border bg-paysats-surface p-1.5 shadow-card ${className}`}
       aria-label="Page sections"
     >
       <div
@@ -54,7 +54,7 @@ export function OfframpSectionTabs({ value, onChange, className = "" }: Props) {
               aria-selected={selected}
               tabIndex={selected ? 0 : -1}
               onClick={() => onChange(t.id)}
-              className={`tap-target min-h-[44px] shrink-0 rounded-xl px-3 py-2 text-sm font-bold transition ${
+              className={`tap-target min-h-[44px] shrink-0 rounded-control px-3 py-2 text-sm font-bold transition ${
                 selected
                   ? "gold-gradient text-white shadow-sm"
                   : "text-paysats-text-muted hover:bg-paysats-surface-muted hover:text-paysats-text"

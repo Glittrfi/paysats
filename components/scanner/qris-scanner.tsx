@@ -28,7 +28,7 @@ export function QrisScanner() {
     <div className="space-y-4">
       <p className="text-sm text-paysats-text">Camera scanner can be mounted with @zxing/browser. Paste sample payload to test flow now.</p>
       <textarea
-        className="h-40 w-full rounded-xl border border-border bg-card p-3 text-paysats-text"
+        className="h-40 w-full rounded-control border border-paysats-border bg-paysats-surface p-3 text-paysats-text outline-none focus:border-paysats-accent"
         placeholder="Paste QRIS EMV payload"
         value={payload}
         onChange={(e) => setPayload(e.target.value)}

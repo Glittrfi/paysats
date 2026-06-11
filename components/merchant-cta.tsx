@@ -4,7 +4,7 @@ export function MerchantCta({ className = "mt-12 scroll-mt-24" }: Props) {
   return (
     <section
       id="merchant"
-      className={`rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-card to-card p-6 ${className}`}
+      className={`rounded-card border border-paysats-accent/30 bg-gradient-to-br from-paysats-accent/10 via-paysats-surface to-paysats-surface p-6 shadow-card ${className}`}
       aria-labelledby="merchant-heading"
     >
       <h2 id="merchant-heading" className="text-lg font-black text-paysats-text">
@@ -16,7 +16,7 @@ export function MerchantCta({ className = "mt-12 scroll-mt-24" }: Props) {
       </p>
       <a
         href="mailto:merchant@paysats.id?subject=Paysats%20merchant%20inquiry"
-        className="tap-target mt-5 inline-flex w-full items-center justify-center rounded-2xl gold-gradient px-4 py-3 text-center text-sm font-black text-white sm:w-auto"
+        className="tap-target mt-5 inline-flex w-full items-center justify-center rounded-control gold-gradient px-4 py-3 text-center text-sm font-black text-white sm:w-auto"
       >
         Talk to us
       </a>

@@ -44,7 +44,7 @@ export function PaysatsLogo({ className = "", showWordmark = true }: Props) {
       {showWordmark ? (
         <span className="inline-flex items-baseline text-xl font-black tracking-tight sm:text-2xl">
           <span className="text-gradient-logo">Pay</span>
-          <span className="text-paysats-text">sats</span>
+          <span className="text-paysats-text">Sats</span>
         </span>
       ) : null}
     </span>

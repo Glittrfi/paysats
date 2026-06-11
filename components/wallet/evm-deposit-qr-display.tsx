@@ -46,7 +46,7 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
     (isWrappedBtcDeposit && satAmount != null && satAmount > 0);
 
   return (
-    <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-4">
+    <div className="flex flex-col items-center gap-4 rounded-card border border-paysats-border bg-paysats-surface p-4 shadow-card">
       <p className="text-center text-xs uppercase tracking-wide text-paysats-text-muted">
         Send {deposit.tokenSymbol}
       </p>
@@ -76,7 +76,7 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
           ) : null}
         </p>
       ) : null}
-      <div className="rounded-xl bg-white p-3">
+      <div className="rounded-control bg-white p-3">
         <QRCode value={deposit.qrValue} size={220} level="M" />
       </div>
       <p className="text-center text-[11px] text-paysats-text-muted">
@@ -86,18 +86,18 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
       <Button
         type="button"
         onClick={() => copy("qr", deposit.qrValue)}
-        className="border border-gold bg-transparent text-gold hover:bg-gold/10"
+        className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10"
       >
         {copied === "qr" ? "Copied" : "Copy QR payload"}
       </Button>
 
-      <div className="w-full space-y-2 rounded-xl border border-border bg-paysats-surface-muted p-3 text-left">
+      <div className="w-full space-y-2 rounded-control border border-paysats-border bg-paysats-surface-muted p-3 text-left">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-paysats-text-muted">Safe (receive)</p>
         <p className="break-all font-mono text-[11px] text-paysats-text">{deposit.toAddress}</p>
         <Button
           type="button"
           onClick={() => copy("addr", deposit.toAddress)}
-          className="w-full border border-border bg-transparent text-xs text-paysats-text"
+          className="w-full border border-paysats-border bg-transparent text-xs text-paysats-text"
         >
           {copied === "addr" ? "Copied" : "Copy address"}
         </Button>
@@ -106,20 +106,20 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
             href={`${explorerBase}/address/${deposit.toAddress}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block text-center text-xs font-semibold text-gold underline"
+            className="block text-center text-xs font-semibold text-paysats-accent underline"
           >
             View on explorer
           </a>
         ) : null}
       </div>
 
-      <div className="w-full space-y-2 rounded-xl border border-border bg-paysats-surface-muted p-3 text-left">
+      <div className="w-full space-y-2 rounded-control border border-paysats-border bg-paysats-surface-muted p-3 text-left">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-paysats-text-muted">Token contract</p>
         <p className="break-all font-mono text-[11px] text-paysats-text">{deposit.tokenAddress}</p>
         <Button
           type="button"
           onClick={() => copy("token", deposit.tokenAddress)}
-          className="w-full border border-border bg-transparent text-xs text-paysats-text"
+          className="w-full border border-paysats-border bg-transparent text-xs text-paysats-text"
         >
           {copied === "token" ? "Copied" : "Copy token contract"}
         </Button>
@@ -128,7 +128,7 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
             href={`${explorerBase}/token/${deposit.tokenAddress}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block text-center text-xs font-semibold text-gold underline"
+            className="block text-center text-xs font-semibold text-paysats-accent underline"
           >
             Token on explorer
           </a>

@@ -6,7 +6,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-paysats-border bg-paysats-bg/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-lg items-center justify-between gap-3 px-4 py-3">
-        <Link href="/offramp" className="tap-target flex min-w-0 items-center" aria-label="Paysats home">
+        <Link href="/offramp" className="tap-target flex min-w-0 items-center" aria-label="PaySats home">
           <PaysatsLogo className="text-xl" />
         </Link>
         <nav className="flex shrink-0 items-center gap-1.5">

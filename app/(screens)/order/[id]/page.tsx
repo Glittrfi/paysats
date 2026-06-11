@@ -245,7 +245,7 @@ function OrderPage() {
           <button
             type="button"
             onClick={() => router.push("/offramp")}
-            className="tap-target rounded-lg px-3 py-2 text-sm font-bold text-paysats-text hover:text-paysats-text"
+            className="tap-target rounded-control px-3 py-2 text-sm font-bold text-paysats-text-muted transition hover:text-paysats-text"
           >
             Back
           </button>
@@ -276,7 +276,7 @@ function OrderPage() {
                 href={paymentProofHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center text-sm font-bold text-gold underline underline-offset-4"
+                className="block text-center text-sm font-bold text-paysats-accent underline underline-offset-4"
               >
                 Lightning payment proof
               </a>
@@ -286,7 +286,7 @@ function OrderPage() {
           showPaymentSuccess ? (
             <div className="space-y-5 py-6 text-center">
               <div
-                className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-gold/20 text-gold"
+                className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-paysats-success/15 text-paysats-success"
                 aria-hidden
               >
                 <svg
@@ -319,7 +319,7 @@ function OrderPage() {
                   href={`https://arbiscan.io/tx/${orderDetail.swapTxHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex text-sm font-bold text-gold underline underline-offset-4"
+                  className="inline-flex text-sm font-bold text-paysats-accent underline underline-offset-4"
                 >
                   View USDT → USDC transaction
                 </a>
@@ -329,7 +329,7 @@ function OrderPage() {
                   href={paymentProofHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm font-bold text-paysats-text-muted underline hover:text-gold"
+                  className="block text-sm font-bold text-paysats-text-muted underline transition hover:text-paysats-accent"
                 >
                   Lightning payment proof
                 </a>
@@ -344,7 +344,7 @@ function OrderPage() {
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="border border-border bg-transparent text-paysats-text"
+                className="border border-paysats-border bg-transparent text-paysats-text"
               >
                 Order details
               </Button>
@@ -353,7 +353,7 @@ function OrderPage() {
             <div className="space-y-5 py-4 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center">
                 <div
-                  className="h-14 w-14 rounded-full border-4 border-paysats-border border-t-gold animate-spin"
+                  className="h-14 w-14 animate-spin rounded-full border-4 border-paysats-border border-t-paysats-accent"
                   aria-hidden
                 />
               </div>
@@ -386,7 +386,7 @@ function OrderPage() {
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="tap-target w-full rounded-xl px-4 py-3 text-sm font-bold text-paysats-text-muted transition hover:text-paysats-text"
+                className="tap-target w-full rounded-control px-4 py-3 text-sm font-bold text-paysats-text-muted transition hover:text-paysats-text"
               >
                 Detailed progress
               </button>
@@ -395,7 +395,7 @@ function OrderPage() {
                   href={paymentProofHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-center text-sm font-bold text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                  className="block text-center text-sm font-bold text-paysats-accent underline decoration-paysats-accent/40 underline-offset-4 transition hover:decoration-paysats-accent"
                 >
                   Lightning payment proof (validate-payment.com)
                 </a>
@@ -407,7 +407,7 @@ function OrderPage() {
                     href="https://validate-payment.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-paysats-text-muted underline hover:text-gold"
+                    className="font-semibold text-paysats-text-muted underline transition hover:text-paysats-accent"
                   >
                     validate-payment.com
                   </a>
@@ -444,7 +444,7 @@ function OrderPage() {
                     )
                     .finally(() => setInvoicePaying(false));
                 }}
-                className="border border-gold bg-transparent text-gold hover:bg-gold/10"
+                className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10"
               >
                 Pay with Alby (WebLN)
               </Button>
@@ -453,7 +453,7 @@ function OrderPage() {
                   href={paymentProofHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="tap-target flex w-full items-center justify-center rounded-xl border border-gold/40 bg-paysats-surface-muted px-4 py-3 text-sm font-bold text-gold"
+                  className="tap-target flex w-full items-center justify-center rounded-control border border-paysats-accent/40 bg-paysats-surface-muted px-4 py-3 text-sm font-bold text-paysats-accent"
                 >
                   Open payment proof
                 </a>
@@ -480,7 +480,7 @@ function OrderPage() {
                     href="https://validate-payment.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-paysats-text-muted underline hover:text-gold"
+                    className="font-semibold text-paysats-text-muted underline transition hover:text-paysats-accent"
                   >
                     validate-payment.com
                   </a>{" "}

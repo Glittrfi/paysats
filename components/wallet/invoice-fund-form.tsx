@@ -63,7 +63,7 @@ export function InvoiceFundForm() {
           enterKeyHint="done"
           value={amountSats}
           onChange={(e) => setAmountSats(e.target.value)}
-          className="tap-target w-full rounded-xl border border-border bg-card px-4 py-3 text-lg font-bold text-paysats-text outline-none focus:border-gold"
+          className="tap-target w-full rounded-control border border-paysats-border bg-paysats-surface px-4 py-3 text-lg font-bold text-paysats-text outline-none focus:border-paysats-accent"
         />
         <Button type="submit" loading={loading} className="gold-gradient">
           Create invoice

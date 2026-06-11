@@ -128,10 +128,10 @@ function RoutePage() {
 
   return (
     <main className="app-shell">
-      <h1 className="mb-2 text-2xl font-black text-gold">Review Route</h1>
+      <h1 className="mb-2 text-2xl font-black text-paysats-text">Review route</h1>
       <p className="mb-6 text-sm text-paysats-text">Confirm fees, fund the route wallet, then start the swap.</p>
       {depositRails?.bitcoinOnchain ? (
-        <section className="mb-6 rounded-2xl border border-border bg-card/60 p-4 text-sm text-paysats-text-muted">
+        <section className="mb-6 rounded-card border border-paysats-border bg-paysats-surface p-4 text-sm text-paysats-text-muted shadow-card">
           <h2 className="font-bold text-paysats-text">Receive options (settlement → IDRX burn)</h2>
           <p className="mt-2 leading-relaxed">
             <span className="font-medium text-paysats-text">Bitcoin (raw on-chain):</span>{" "}
@@ -140,7 +140,7 @@ function RoutePage() {
               href={depositRails.bitcoinOnchain.wdkDocsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gold underline underline-offset-2"
+              className="text-paysats-accent underline underline-offset-2"
             >
               WDK Spark deposits & withdrawals
             </a>
@@ -192,7 +192,7 @@ function RoutePage() {
           <Button
             type="button"
             onClick={() => fundViaWebln(fundingBolt11).catch((e) => setFlowError(String(e)))}
-            className="border border-gold bg-transparent text-gold"
+            className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10"
           >
             Pay with WebLN
           </Button>

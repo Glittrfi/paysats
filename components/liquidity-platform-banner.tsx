@@ -72,13 +72,13 @@ export function LiquidityPlatformBanner({ className = "" }: { className?: string
   if (error && !stats) {
     return (
       <div
-        className={`rounded-2xl border border-border bg-paysats-surface px-4 py-3 text-center text-xs text-paysats-text-muted shadow-card ${className}`}
+        className={`rounded-card border border-paysats-border bg-paysats-surface px-4 py-3 text-center text-xs text-paysats-text-muted shadow-card ${className}`}
       >
         {error}
         <button
           type="button"
           onClick={() => void load()}
-          className="ml-2 font-bold text-gold underline underline-offset-2"
+          className="ml-2 font-bold text-paysats-accent underline underline-offset-2"
         >
           Retry
         </button>
@@ -89,7 +89,7 @@ export function LiquidityPlatformBanner({ className = "" }: { className?: string
   if (!stats) {
     return (
       <div
-        className={`rounded-2xl border border-border bg-paysats-surface px-4 py-8 text-center text-sm text-paysats-text-muted shadow-card ${className}`}
+        className={`rounded-card border border-paysats-border bg-paysats-surface px-4 py-8 text-center text-sm text-paysats-text-muted shadow-card ${className}`}
       >
         Loading platform volume…
       </div>
@@ -98,7 +98,7 @@ export function LiquidityPlatformBanner({ className = "" }: { className?: string
 
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-paysats-surface to-paysats-surface-muted shadow-card ${className}`}
+      className={`overflow-hidden rounded-card border border-paysats-border bg-gradient-to-br from-paysats-surface to-paysats-surface-muted shadow-card ${className}`}
     >
       <div className="flex flex-col gap-4 px-5 py-5 md:flex-row md:items-stretch md:justify-between md:gap-4 md:px-8 md:py-6">
         <div className="flex w-full flex-1 items-center justify-center md:max-w-md md:justify-start">

@@ -26,7 +26,7 @@ function ReceiptPage() {
 
   return (
     <main className="app-shell space-y-4">
-      <h1 className="mb-4 text-2xl font-black text-gold">Completed</h1>
+      <h1 className="mb-4 text-2xl font-black text-paysats-text">Completed</h1>
       <ReceiptCard
         sats={order.satAmount || 0}
         usdt={order.usdtAmount || 0}

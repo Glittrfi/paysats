@@ -9,7 +9,7 @@ export function Button({ className = "", loading, children, disabled, ...props }
     <button
       {...props}
       disabled={disabled || loading}
-      className={`tap-target w-full rounded-xl px-4 py-3 font-bold text-white transition active:scale-[0.99] disabled:opacity-40 ${className}`}
+      className={`tap-target w-full rounded-control px-4 py-3 font-bold text-white transition active:scale-[0.99] disabled:opacity-40 ${className}`}
     >
       {loading ? "Loading..." : children}
     </button>

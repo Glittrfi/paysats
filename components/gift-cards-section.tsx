@@ -25,7 +25,7 @@ export function GiftCardsSection({ className = "mt-12" }: Props) {
             this catalog goes live.
           </p>
         </div>
-        <span className="rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-gold">
+        <span className="rounded-pill border border-paysats-accent/40 bg-paysats-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-paysats-accent">
           Coming soon
         </span>
       </div>
@@ -33,7 +33,7 @@ export function GiftCardsSection({ className = "mt-12" }: Props) {
         {BRANDS.map((b) => (
           <article
             key={b.name}
-            className={`relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${b.tint} p-4 shadow-lg`}
+            className={`relative overflow-hidden rounded-card border border-white/10 bg-gradient-to-br ${b.tint} p-4 shadow-tile`}
           >
             <div className="absolute inset-0 bg-black/25" aria-hidden />
             <div className="relative">

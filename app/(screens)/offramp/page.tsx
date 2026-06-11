@@ -77,6 +77,15 @@ function formatIdrDotsFromDigits(digits: string): string {
   return d.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+/** Shared chevron affordance for native <select> controls. */
+const SELECT_CHEVRON_STYLE = {
+  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "right 0.75rem center",
+  backgroundSize: "1.25rem",
+  paddingRight: "2.5rem",
+} as const;
+
 export default function OfframpPage() {
   const router = useRouter();
 
@@ -417,80 +426,42 @@ export default function OfframpPage() {
 
       {section === "pay" ? (
         <div className="space-y-4">
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <div className="flex items-center justify-between">
-              <p className="text-xs uppercase tracking-wide text-paysats-text-muted">
+          <div className="rounded-card border border-paysats-border bg-paysats-surface p-4 shadow-card">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-paysats-text-muted">
                 Sats in / Rupiah out
               </p>
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveCurrency("idr");
-                      setLastEdited("idr");
-                    }}
-                    className={`tap-target rounded-full border px-4 py-3 text-sm font-extrabold uppercase tracking-wide ${
-                      primaryCurrency === "idr"
-                        ? "border-gold text-gold"
-                        : "border-border text-paysats-text"
-                    }`}
-                  >
-                    IDR
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveCurrency("sats");
-                      setLastEdited("sats");
-                    }}
-                    className={`tap-target rounded-full border px-4 py-3 text-sm font-extrabold uppercase tracking-wide ${
-                      primaryCurrency === "sats"
-                        ? "border-gold text-gold"
-                        : "border-border text-paysats-text"
-                    }`}
-                  >
-                    SATS
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  aria-label="Swap between IDR and SATS entry"
-                  onClick={() => {
-                    const next = activeCurrency === "idr" ? "sats" : "idr";
-                    setActiveCurrency(next);
-                    setLastEdited(next);
-                  }}
-                  className="tap-target grid place-items-center rounded-full border border-border bg-transparent px-4 py-3 text-paysats-text"
-                >
-                  {/* up/down swap icon */}
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M8 7h10m0 0-3-3m3 3-3 3"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16 17H6m0 0 3 3m-3-3 3-3"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
+              <div
+                role="tablist"
+                aria-label="Amount entry currency"
+                className="inline-flex shrink-0 rounded-pill border border-paysats-border bg-paysats-surface-muted p-1"
+              >
+                {(["idr", "sats"] as const).map((c) => {
+                  const selected = primaryCurrency === c;
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      role="tab"
+                      aria-selected={selected}
+                      onClick={() => {
+                        setActiveCurrency(c);
+                        setLastEdited(c);
+                      }}
+                      className={`min-h-[40px] rounded-control px-4 text-xs font-extrabold uppercase tracking-wide transition ${
+                        selected
+                          ? "bg-paysats-surface text-paysats-accent shadow-card"
+                          : "text-paysats-text-muted hover:text-paysats-text"
+                      }`}
+                    >
+                      {c}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            <div className="mt-5 rounded-xl border border-border bg-paysats-surface-muted p-3">
+            <div className="mt-5 rounded-control border border-paysats-border bg-paysats-surface-muted p-3">
               <label
                 htmlFor="offramp-funding-source"
                 className="text-xs font-medium text-paysats-text-muted"
@@ -503,14 +474,8 @@ export default function OfframpPage() {
                 onChange={(e) =>
                   setFundingSource(e.target.value as FundingSource)
                 }
-                className="tap-target mt-2 w-full appearance-none rounded-xl border border-border bg-card px-4 py-3 text-sm font-bold text-paysats-text outline-none focus:border-gold"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "right 0.75rem center",
-                  backgroundSize: "1.25rem",
-                  paddingRight: "2.5rem",
-                }}
+                className="tap-target mt-2 w-full appearance-none rounded-control border border-paysats-border bg-paysats-surface px-4 py-3 text-sm font-bold text-paysats-text outline-none focus:border-paysats-accent"
+                style={SELECT_CHEVRON_STYLE}
               >
                 <option value="lightning">
                   Bitcoin / Lightning — LN invoice (Boltz → USDT)
@@ -556,57 +521,50 @@ export default function OfframpPage() {
               </div>
             </div>
 
-            <button
-              type="button"
-              className="tap-target mt-6 flex w-full items-center justify-between rounded-2xl border border-border bg-paysats-surface-muted px-4 py-4 text-left"
-            >
-              <div className="flex items-center gap-3">
-                {/* wallet icon */}
-                <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-paysats-surface-muted text-paysats-text">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M3 7.5A3.5 3.5 0 0 1 6.5 4h11A3.5 3.5 0 0 1 21 7.5v9A3.5 3.5 0 0 1 17.5 20h-11A3.5 3.5 0 0 1 3 16.5v-9Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M21 9h-5a2 2 0 0 0 0 4h5"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16.5 11h.01"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                <div className="leading-tight">
-                  <p className="text-sm font-semibold text-paysats-text">
-                    Per-order limit
-                  </p>
+            <div className="mt-6 flex items-center gap-3 rounded-control border border-paysats-border bg-paysats-surface-muted px-4 py-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-control border border-paysats-border bg-paysats-surface text-paysats-text-muted">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 7.5A3.5 3.5 0 0 1 6.5 4h11A3.5 3.5 0 0 1 21 7.5v9A3.5 3.5 0 0 1 17.5 20h-11A3.5 3.5 0 0 1 3 16.5v-9Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M21 9h-5a2 2 0 0 0 0 4h5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M16.5 11h.01"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <div className="flex w-full items-center justify-between gap-3">
+                <p className="text-sm text-paysats-text-muted">Per-order limit</p>
+                <div className="text-right leading-tight">
                   <p className="text-sm font-black text-paysats-text">
-                    <span className="text-gold">100</span> USDC
+                    <span className="text-paysats-accent">100</span> USDC
                   </p>
                   {btcIdr && usdcIdr ? (
-                    <p className="mt-0.5 text-xs text-paysats-text-muted">
+                    <p className="text-xs text-paysats-text-muted">
                       ≈ {formatIdr(Math.ceil(((100 * usdcIdr) / btcIdr) * 1e8))}{" "}
                       sats in
                     </p>
                   ) : null}
                 </div>
               </div>
-              <span className="text-xl font-black text-paysats-text-muted">{">"}</span>
-            </button>
+            </div>
 
             <div className="mt-6 text-center text-xs text-paysats-text-muted">
               {btcIdr ? (
@@ -627,34 +585,35 @@ export default function OfframpPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="mb-3 text-xs uppercase tracking-wide text-paysats-text-muted">
+          <div className="rounded-card border border-paysats-border bg-paysats-surface p-4 shadow-card">
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-paysats-text-muted">
               Rupiah out — destination
             </p>
 
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => setPayoutRailTab("bank")}
-                className={`tap-target rounded-xl border px-3 py-2 text-sm font-bold ${
-                  payoutRailTab === "bank"
-                    ? "border-gold text-gold"
-                    : "border-border text-paysats-text"
-                }`}
-              >
-                BANK
-              </button>
-              <button
-                type="button"
-                onClick={() => setPayoutRailTab("ewallet")}
-                className={`tap-target rounded-xl border px-3 py-2 text-sm font-bold ${
-                  payoutRailTab === "ewallet"
-                    ? "border-gold text-gold"
-                    : "border-border text-paysats-text"
-                }`}
-              >
-                E-Wallets
-              </button>
+            <div className="grid grid-cols-2 gap-1 rounded-pill border border-paysats-border bg-paysats-surface-muted p-1">
+              {(
+                [
+                  { id: "bank", label: "Bank" },
+                  { id: "ewallet", label: "E-wallet" },
+                ] as const
+              ).map((tab) => {
+                const selected = payoutRailTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setPayoutRailTab(tab.id)}
+                    aria-pressed={selected}
+                    className={`min-h-[40px] rounded-control text-sm font-bold transition ${
+                      selected
+                        ? "bg-paysats-surface text-paysats-accent shadow-card"
+                        : "text-paysats-text-muted hover:text-paysats-text"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
             </div>
 
             <label
@@ -684,14 +643,8 @@ export default function OfframpPage() {
                   ? !bankMethods.length
                   : !ewalletMethods.length)
               }
-              className="tap-target mt-2 w-full appearance-none rounded-xl border border-border bg-card px-4 py-3 text-sm font-bold text-paysats-text outline-none focus:border-gold disabled:opacity-50"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "right 0.75rem center",
-                backgroundSize: "1.25rem",
-                paddingRight: "2.5rem",
-              }}
+              className="tap-target mt-2 w-full appearance-none rounded-control border border-paysats-border bg-paysats-surface px-4 py-3 text-sm font-bold text-paysats-text outline-none focus:border-paysats-accent disabled:opacity-50"
+              style={SELECT_CHEVRON_STYLE}
             >
               {(payoutRailTab === "bank" ? bankMethods : ewalletMethods).map(
                 (m) => (
@@ -736,12 +689,12 @@ export default function OfframpPage() {
                 }
                 value={recipient}
                 onChange={(e) => setRecipient(e.target.value)}
-                className="tap-target w-full rounded-xl border border-border bg-card px-4 py-3 text-lg font-bold text-paysats-text outline-none focus:border-gold"
+                className="tap-target w-full rounded-control border border-paysats-border bg-paysats-surface px-4 py-3 text-lg font-bold text-paysats-text outline-none focus:border-paysats-accent"
               />
               <button
                 type="button"
                 onClick={() => router.push("/scan")}
-                className="tap-target whitespace-nowrap rounded-xl border border-border bg-transparent px-3 py-3 text-sm font-bold text-paysats-text"
+                className="tap-target whitespace-nowrap rounded-control border border-paysats-border bg-transparent px-3 py-3 text-sm font-bold text-paysats-text transition hover:border-paysats-accent hover:text-paysats-accent"
               >
                 Scan QR
               </button>
@@ -783,7 +736,7 @@ export default function OfframpPage() {
       ) : null}
 
       {section === "pay" || section === "liquidity" ? (
-        <footer className="mt-12 border-t border-border pt-6 text-center text-xs leading-relaxed text-paysats-text-faint">
+        <footer className="mt-12 border-t border-paysats-border pt-6 text-center text-xs leading-relaxed text-paysats-text-faint">
           Paysats — Lightning settlement for Indonesia
           <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-paysats-text-muted">
             <TetherMark size={18} />
