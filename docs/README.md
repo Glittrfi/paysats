@@ -1,7 +1,7 @@
 ---
 description: >-
-  PaySats. Bitcoin and Lightning settlement with a native fiat off-ramp. Live
-  in Indonesia (IDR) today, expanding to India (INR) next.
+  PaySats. Agentic Bitcoin and stablecoin settlement for Southeast Asia on BNB
+  Chain. DCA into BTC, BTC-backed borrowing, and bank settlement — IDR live.
 icon: bolt
 layout:
   width: default
@@ -21,37 +21,50 @@ layout:
 
 # Welcome to PaySats
 
-PaySats is a **Bitcoin and Lightning settlement layer with a native fiat off-ramp**. Pay in **sats**, and the recipient gets the local currency on their bank account or e-wallet, with a transparent audit trail and no manual exchange babysitting.
+PaySats is an **agentic Bitcoin and stablecoin settlement app for Southeast Asia**, built on **BNB Chain**. Users and AI agents **DCA into BTC**, **collateralize BTC to borrow local stablecoins** (e.g. IDRX), and **settle directly into bank accounts** — starting with **IDR** in Indonesia, expanding to **PHP**, **VND**, **THB**, and **INR**.
 
-Live today in **Indonesia** (IDR to BCA, Jago, GoPay, OVO, and more). **India** (INR) is next, followed by additional local rails.
+Southeast Asian fiat bleeds slowly against the dollar. BTC and dollar stablecoins like USDC preserve purchasing power. PaySats is the **last-mile settlement layer** that connects on-chain value to named local accounts — via **MCP** today and **x402-compatible** agent rails next.
 
-{% hint style="info" %}
-Built on **Tether WDK** (Spark for Lightning, ERC-4337 smart accounts for EVM), orchestrated through **Boltz** and **LiFi**, and settled via **IDRX** burn/redeem onto local rails.
-{% endhint %}
+## Three primitives
+
+| Primitive | Summary | Status |
+|-----------|---------|--------|
+| **Agentic DCA into BTC** | Recurring / agent-driven exit from local currency into BTC on BNB | Roadmap |
+| **BTC-backed borrowing** | Collateralize BTC; borrow IDR stablecoins (IDRX) | Roadmap |
+| **Bank settlement** | Wallet ↔ bank / e-wallet through licensed redeem partners | **Live (IDR)** |
+
+Full detail: [Product primitives](introduction/primitives.md).
 
 ## Where to next
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Why PaySats</strong></td><td>P2P scams, frozen bank accounts, and the case for trusted BTC → IDR settlement.</td><td><a href="introduction/why-paysats.md">why-paysats.md</a></td></tr><tr><td><strong>Quickstart</strong></td><td>Send your first sats and get IDR settled in five steps using the SDK.</td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>SDK: @paysats/sdk</strong></td><td>Node client for quotes, payout methods, off-ramp orders, and polling.</td><td><a href="developers/sdk.md">sdk.md</a></td></tr><tr><td><strong>MCP server</strong></td><td>Connect Cursor, Claude Desktop, or Claude web to PaySats over MCP.</td><td><a href="developers/mcp-server.md">mcp-server.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Why PaySats</strong></td><td>SEA currency bleed, P2P risk, and the case for trusted programmatic settlement.</td><td><a href="introduction/why-paysats.md">why-paysats.md</a></td></tr><tr><td><strong>Product primitives</strong></td><td>DCA, borrowing, and bank settlement on BNB Chain — live vs roadmap.</td><td><a href="introduction/primitives.md">primitives.md</a></td></tr><tr><td><strong>Settlement quickstart</strong></td><td>Your first IDR bank settlement in five steps using the SDK.</td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>MCP server</strong></td><td>Agent last-mile settlement — quote, list rails, create orders.</td><td><a href="developers/mcp-server.md">mcp-server.md</a></td></tr></tbody></table>
 
-## What PaySats does, in one flow
+## What PaySats does, in one picture
 
 ```mermaid
-flowchart LR
-  ln[Lightning sats] --> boltz[Boltz LN to USDT]
-  boltz --> wdk[TWDK smart account]
-  wdk --> lifi[LiFi USDT to IDRX]
-  lifi --> redeem[IDRX burn and redeem]
-  redeem --> bank[BCA or e-wallet]
+flowchart TB
+  subgraph primitives [PaySats on BNB Chain]
+    dca[Agentic DCA into BTC]
+    borrow[BTC-backed borrow IDRX]
+    settle[Bank settlement]
+  end
+  agents[AI agents MCP / x402] --> primitives
+  settle --> idr[IDR live]
+  settle --> sea[PHP VND THB INR next]
+  dca -.->|roadmap| borrow
+  borrow -.->|roadmap| settle
 ```
 
-* **Bitcoin-native in.** Lightning by default; native on-chain BTC via **Spark** deposit addresses; wrapped BTC on Base (**cbBTC**) and BNB Chain (**BTCB**).
-* **IDRX in the middle.** USDT ↔ IDRX routed across Base, BNB Chain, and Polygon via **TWDK ERC-4337** safes.
-* **IDR out.** Bank transfer (BCA and partners) or e-wallet (GoPay, OVO, Jago, ...), driven by a live list of payout methods.
+**Live settlement path (today):**
+
+* **Bitcoin in** — Lightning (see [Tether Lightning rails](integrations/tether-lightning.md)), **cbBTC** on Base, or **BTCB** on BNB Chain.
+* **Stablecoin middle** — IDRX burn / redeem via licensed partners.
+* **IDR out** — BCA and partner banks, or e-wallets (GoPay, OVO, Jago, …).
 
 ## Developer hub
 
 {% hint style="success" %}
-PaySats exposes **three integration surfaces**: the HTTP `/v1` API, the `@paysats/sdk` Node client, and the `@paysats/mcp` Model Context Protocol server. All three sit on top of the same tenant API key.
+PaySats exposes **three integration surfaces** for the **settlement primitive**: HTTP `/v1`, `@paysats/sdk`, and `@paysats/mcp`. All three use the same tenant API key.
 {% endhint %}
 
 <table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>HTTP API /v1</strong></td><td>curl, TypeScript, and SDK examples for every endpoint.</td><td><a href="developers/http-api.md">http-api.md</a></td></tr><tr><td><strong>Order lifecycle</strong></td><td>All order states from <code>IDLE</code> to <code>COMPLETED</code>, with terminal-state rules.</td><td><a href="developers/order-lifecycle.md">order-lifecycle.md</a></td></tr><tr><td><strong>Deposit rails</strong></td><td>Lightning, cbBTC on Base, and BTCB on BNB Chain. What each rail returns.</td><td><a href="developers/deposit-rails.md">deposit-rails.md</a></td></tr><tr><td><strong>Payout methods</strong></td><td>Banks vs e-wallets, <code>bankCode</code>/<code>bankName</code>, and recipient format rules.</td><td><a href="developers/payout-methods.md">payout-methods.md</a></td></tr></tbody></table>
@@ -59,7 +72,7 @@ PaySats exposes **three integration surfaces**: the HTTP `/v1` API, the `@paysat
 ## Current status
 
 {% hint style="warning" %}
-**Beta.** Lightning in, BCA / e-wallet out is production-ready. **QRIS ↔ IDRX** and **gift-card** flows are actively being wired. See [Supported rails](introduction/supported-rails.md) for the current matrix.
+**Beta.** **Bank settlement (IDR)** is production-ready. **Agentic DCA** and **BTC-backed borrowing** are on the roadmap. **QRIS ↔ IDRX** and **gift-card** flows are actively being wired. See [Supported rails](introduction/supported-rails.md) and [Product primitives](introduction/primitives.md).
 {% endhint %}
 
 Need access? Ping us on Telegram at [@vibcrypto](https://t.me/vibcrypto) to request a tenant API key, or email <code class="expression">space.vars.support_email</code>.

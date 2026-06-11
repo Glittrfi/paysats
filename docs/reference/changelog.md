@@ -12,6 +12,15 @@ Versions follow the npm packages. Breaking changes bump the major. API `/v1` end
 {% endhint %}
 
 {% updates format="full" %}
+{% update date="2026-06-11" %}
+## Docs reframe: SEA agentic settlement
+
+* Repositioned PaySats from Lightning off-ramp-only to **three BNB Chain primitives**: agentic DCA into BTC, BTC-backed borrowing, and **bank settlement** (IDR live).
+* Added [Product primitives](../introduction/primitives.md) and [Tether Lightning rails](../integrations/tether-lightning.md) integration stub; moved Lightning / Boltz / TWDK detail out of intro pages.
+* Updated welcome, Why PaySats, How it works, and Supported rails for Southeast Asia expansion (**PHP**, **VND**, **THB**, **INR** alongside live **IDR**).
+* Renamed quickstart to **Settlement quickstart**; refreshed MCP and developer hub copy for agent last-mile settlement.
+{% endupdate %}
+
 {% update date="2025-04-22" %}
 ## Documentation launch
 

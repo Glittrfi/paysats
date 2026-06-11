@@ -4,12 +4,17 @@
 
 * [Welcome](README.md)
 * [Why PaySats](introduction/why-paysats.md)
+* [Product primitives](introduction/primitives.md)
 * [How it works](introduction/how-it-works.md)
 * [Supported rails](introduction/supported-rails.md)
 
+## Integrations
+
+* [Tether Lightning rails](integrations/tether-lightning.md)
+
 ## Getting started
 
-* [Quickstart](getting-started/quickstart.md)
+* [Settlement quickstart](getting-started/quickstart.md)
 * [API keys](getting-started/api-keys.md)
 
 ## Developers

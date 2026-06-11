@@ -1,13 +1,13 @@
 ---
 description: >-
-  Send your first sats and get IDR settled in five steps, using the
-  @paysats/sdk Node client.
+  Settlement quickstart: your first IDR bank payout in five steps using
+  @paysats/sdk (bank settlement primitive).
 icon: rocket
 ---
 
-# Quickstart
+# Settlement quickstart
 
-Go from nothing to "IDR landed in a BCA account" in five steps.
+Go from nothing to **IDR landed in a BCA account** in five steps. This guide covers the **bank settlement** primitive — the live PaySats primitive today. See [Product primitives](../introduction/primitives.md) for DCA and borrowing (roadmap).
 
 {% hint style="info" %}
 All SDK calls happen **server-side**. Never expose `PAYSATS_API_KEY` in a browser bundle.

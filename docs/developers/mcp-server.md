@@ -1,20 +1,23 @@
 ---
 description: >-
-  "@paysats/mcp" is a Model Context Protocol server that lets Cursor, Claude
-  Desktop, Claude web, and other MCP clients quote, list, and create PaySats
-  off-ramp orders.
+  @paysats/mcp — Model Context Protocol server for AI agent last-mile
+  settlement: quotes, payout rails, and IDR bank settlement orders.
 icon: plug
 ---
 
 # MCP server: @paysats/mcp
 
-[Model Context Protocol](https://modelcontextprotocol.io) server that wraps `@paysats/sdk` so a connected LLM can:
+[Model Context Protocol](https://modelcontextprotocol.io) server that wraps `@paysats/sdk` so **AI agents** can perform **last-mile settlement** into Southeast Asian bank accounts — **IDR live today**, PHP / VND / THB / INR expanding. Pairs with agent identity stacks (e.g. Bank of AI); **x402-compatible** payment rails are on the roadmap.
+
+A connected LLM can:
 
 * Fetch BTC/IDR quotes and platform stats
 * List payout banks / e-wallets
 * Check configured deposit rails
-* Create Bitcoin → IDR off-ramp orders and return the BOLT11 invoice
+* Create **bank settlement** orders (Bitcoin → IDR) and return the BOLT11 invoice or deposit instructions
 * Look up and list orders for the tenant
+
+Product context: [Product primitives](../introduction/primitives.md). Lightning / USDT stack: [Tether Lightning rails](../integrations/tether-lightning.md).
 
 {% hint style="info" %}
 The server ships a canonical `instructions` string so clients (Claude, ChatGPT-compatible connectors, etc.) know to call `list_payout_methods` first, resolve `idrxBankCode` / `idrxBankName` from that list, and only then call `create_offramp_order`.

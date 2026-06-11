@@ -110,4 +110,4 @@ It **cannot**:
 * If a key leaks, ping us on Telegram at [@vibcrypto](https://t.me/vibcrypto) or email <code class="expression">space.vars.support_email</code> from the account of record. We revoke and reissue.
 * Losing a secret is recoverable (rotate); losing the key ID is not sensitive.
 
-Next: [Quickstart](quickstart.md) · [HTTP API /v1](../developers/http-api.md)
+Next: [Settlement quickstart](quickstart.md) · [HTTP API /v1](../developers/http-api.md)

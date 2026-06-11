@@ -1,15 +1,15 @@
 ---
 description: >-
-  Developer hub. Three integration surfaces over the same tenant API key: the
-  HTTP /v1 API, @paysats/sdk, and @paysats/mcp.
+  Developer hub for the bank settlement primitive: HTTP /v1, @paysats/sdk, and
+  @paysats/mcp over one tenant API key.
 icon: code
 ---
 
 # Developers
 
-PaySats exposes **three integration surfaces**, all backed by the same tenant API key.
+PaySats exposes **three integration surfaces** for the **bank settlement** primitive (live today), all backed by the same tenant API key. **MCP** is the primary surface for **AI agent** last-mile settlement; DCA and borrowing APIs are on the roadmap. See [Product primitives](../introduction/primitives.md).
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>SDK: @paysats/sdk</strong></td><td>Typed Node client. Quotes, payout methods, orders, polling.</td><td><a href="sdk.md">sdk.md</a></td></tr><tr><td><strong>MCP server: @paysats/mcp</strong></td><td>Model Context Protocol server for Cursor, Claude Desktop, and Claude web.</td><td><a href="mcp-server.md">mcp-server.md</a></td></tr><tr><td><strong>HTTP API /v1</strong></td><td>Raw REST endpoints with curl, SDK, and TypeScript examples.</td><td><a href="http-api.md">http-api.md</a></td></tr><tr><td><strong>Order lifecycle</strong></td><td>Every <code>OrderState</code>, terminal rules, and polling strategy.</td><td><a href="order-lifecycle.md">order-lifecycle.md</a></td></tr><tr><td><strong>Deposit rails</strong></td><td>Lightning, cbBTC on Base, and BTCB on BNB Chain. Shapes and examples.</td><td><a href="deposit-rails.md">deposit-rails.md</a></td></tr><tr><td><strong>Payout methods</strong></td><td>Bank vs e-wallet, <code>bankCode</code>/<code>bankName</code>, and recipient formats.</td><td><a href="payout-methods.md">payout-methods.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>SDK: @paysats/sdk</strong></td><td>Typed Node client. Quotes, payout methods, orders, polling.</td><td><a href="sdk.md">sdk.md</a></td></tr><tr><td><strong>MCP server: @paysats/mcp</strong></td><td>Agent last-mile settlement — quote, list rails, create IDR orders.</td><td><a href="mcp-server.md">mcp-server.md</a></td></tr><tr><td><strong>HTTP API /v1</strong></td><td>Raw REST endpoints with curl, SDK, and TypeScript examples.</td><td><a href="http-api.md">http-api.md</a></td></tr><tr><td><strong>Order lifecycle</strong></td><td>Every <code>OrderState</code>, terminal rules, and polling strategy.</td><td><a href="order-lifecycle.md">order-lifecycle.md</a></td></tr><tr><td><strong>Deposit rails</strong></td><td>Lightning, cbBTC on Base, and BTCB on BNB Chain. Shapes and examples.</td><td><a href="deposit-rails.md">deposit-rails.md</a></td></tr><tr><td><strong>Payout methods</strong></td><td>Bank vs e-wallet, <code>bankCode</code>/<code>bankName</code>, and recipient formats.</td><td><a href="payout-methods.md">payout-methods.md</a></td></tr></tbody></table>
 
 ## Pick a surface
 
@@ -17,7 +17,7 @@ PaySats exposes **three integration surfaces**, all backed by the same tenant AP
 |----------|----------|
 | A Node / TypeScript backend creating off-ramp orders | [`@paysats/sdk`](sdk.md) |
 | A backend in another language, or you need a specific endpoint | [HTTP API `/v1`](http-api.md) |
-| An LLM (Cursor, Claude Desktop, Claude web) that should be able to quote / list / create orders on your behalf | [`@paysats/mcp`](mcp-server.md) |
+| An AI agent (Cursor, Claude Desktop, Claude web) settling BTC → local fiat on behalf of a user | [`@paysats/mcp`](mcp-server.md) |
 | Driving UI off order state | [Order lifecycle](order-lifecycle.md) |
 
 ## Base URL

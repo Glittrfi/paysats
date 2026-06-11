@@ -9,3 +9,5 @@ redirects:
   mcp: developers/mcp-server.md
   api: developers/http-api.md
   quickstart: getting-started/quickstart.md
+  tether: integrations/tether-lightning.md
+  primitives: introduction/primitives.md

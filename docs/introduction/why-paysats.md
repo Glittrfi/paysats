@@ -1,16 +1,17 @@
 ---
 description: >-
-  The case for PaySats. Why informal BTC to local-fiat flows end in scams,
-  frozen bank accounts, and disputed receipts, and how PaySats removes that
-  risk.
+  The case for PaySats. Southeast Asian currency bleed, informal BTC-to-fiat
+  risk, and why agentic settlement on BNB Chain matters.
 icon: shield-halved
 ---
 
 # Why PaySats
 
-Moving value between **Bitcoin** and **local fiat** in emerging markets today is almost always a mess of **informal peer-to-peer trades, manual exchanges, and inbound bank transfers from strangers**. PaySats exists because every single one of those steps is a risk.
+Fiat in Southeast Asia is in a slow bleed against the dollar. **IDR**, **PHP**, **VND**, and **THB** are structurally weaker over time, while **BTC** and dollar stablecoins like **USDC** preserve purchasing power. PaySats exists so users and AI agents can **DCA out of local currency**, **borrow against BTC collateral**, and **settle into named bank accounts** — programmatically, with an audit trail.
 
-The concrete examples below come from our first live market (Indonesia, IDR). The same patterns show up in India (INR) and other markets we're expanding into.
+Moving value between **Bitcoin** and **local fiat** today is still mostly informal P2P, manual CEX withdrawals, and inbound transfers from strangers. Every step is a risk. PaySats replaces that with three **BNB Chain primitives** — only **bank settlement** is live today; DCA and borrowing are on the roadmap. See [Product primitives](primitives.md).
+
+The concrete scam and freeze examples below come from our first live market (**Indonesia, IDR**). The same patterns show up across **PHP**, **VND**, **THB**, and **INR** as we expand.
 
 ## The problems we actually see
 
@@ -30,12 +31,12 @@ There is **no audit trail**, **no settlement guarantee**, and **no recourse**.
 {% hint style="warning" %}
 **Bank accounts and e-wallets get frozen.**
 
-Local banks and e-wallets routinely **freeze or block accounts** that receive multiple unverified inbound transfers from strangers, which is exactly what a P2P BTC trade looks like to a fraud engine. This is true across the markets we serve today (Indonesia: BCA, Mandiri, BRI, GoPay, OVO, DANA) and the markets we're expanding into (India: HDFC, ICICI, SBI, Paytm, PhonePe, GPay).
+Local banks and e-wallets routinely **freeze or block accounts** that receive multiple unverified inbound transfers from strangers, which is exactly what a P2P BTC trade looks like to a fraud engine. This is true in Indonesia (BCA, Mandiri, BRI, GoPay, OVO, DANA) and in every market we are expanding into — Philippines, Vietnam, Thailand, and India.
 
 Typical triggers:
 
 * Repeated inbound transfers from new, unrelated senders.
-* Amounts and memos that match patterns flagged by local AML rules (PPATK in Indonesia, FIU-IND in India).
+* Amounts and memos that match patterns flagged by local AML rules (PPATK in Indonesia, and equivalents elsewhere).
 * A single complaint from one of those senders later claiming fraud.
 
 Once frozen, unfreezing is a **manual, weeks-long process** involving branch visits, documentation, and sometimes regulator review. Your entire payout rail disappears overnight.
@@ -51,13 +52,13 @@ For **sub-dollar to everyday amounts**, the user experience today is:
 3. Manually withdraw to a bank / e-wallet.
 4. Hope the withdrawal isn't flagged.
 
-Every one of those steps has a **spread, a fee, and a delay**, and the user has to physically sit in front of the trade.
+Every one of those steps has a **spread, a fee, and a delay**, and the user has to physically sit in front of the trade. **Agents cannot automate** this without a settlement API.
 {% endhint %}
 
 {% hint style="danger" %}
-**No transparent settlement for merchants.**
+**No transparent settlement for merchants or agents.**
 
-A merchant who accepts BTC directly has no way to prove (to themselves, to their accountant, or to regulators) which on-chain payment corresponds to which fiat settlement. There is no consistent order ID, no invoice linkage, no explorer link tied to a payout reference.
+A merchant or agent moving BTC to local fiat has no consistent way to prove which on-chain payment corresponds to which bank credit. There is no single order ID, no invoice linkage, no explorer link tied to a payout reference.
 {% endhint %}
 
 ## What PaySats replaces that with
@@ -71,35 +72,37 @@ A merchant who accepts BTC directly has no way to prove (to themselves, to their
 * Manual CEX withdrawals, watched by hand
 * No single reference linking BTC payment to fiat payout
 * FX drift between "quote" and "settled"
-* Invoice paid in sats but reconciled manually in local fiat
+* Agents cannot settle autonomously into local accounts
 {% endcolumn %}
 
 {% column %}
 ### With PaySats
 
-* A single **API call** creates an order with a BOLT11 invoice (or a deposit address for on-chain BTC).
-* Funds move through **regulated, auditable rails**: Boltz for Lightning, Tether WDK smart accounts, stablecoin to local-fiat swaps (IDRX today, INR-pegged partners next), and licensed payout partners.
-* **One `orderId`** ties the Lightning invoice, the on-chain transactions, the stablecoin redeem, and the final bank / e-wallet credit together.
-* **Live quote** is locked at order creation so what the payer sees is what the merchant gets.
-* **Webhooks and polling** give a deterministic state machine from `IDLE` to `COMPLETED`.
+* **Bank settlement (live):** one API call creates an order; funds move through licensed redeem partners (IDRX in Indonesia).
+* **One `orderId`** ties deposit, on-chain swaps, stablecoin redeem, and final bank / e-wallet credit.
+* **Live quote** locked at order creation.
+* **MCP** for AI agents to quote, list rails, and create settlement orders today.
+* **DCA and borrowing (roadmap):** programmatic BTC accumulation and IDRX borrow against collateral on BNB Chain.
+* Lightning / USDT legs documented under [Tether Lightning rails](../integrations/tether-lightning.md).
 {% endcolumn %}
 {% endcolumns %}
 
 ## Who PaySats is for
 
-* **Local merchants** accepting BTC / Lightning but wanting local fiat in their existing bank or e-wallet account, without running their own swap infra.
-* **Apps and wallets** that want a single `createOfframpOrder` call instead of plugging together Boltz, LiFi, stablecoin burn/redeem, and a payout API themselves.
-* **Tooling and AI agents** using the MCP server to programmatically price, quote, and settle small BTC to local-fiat transactions on behalf of a user.
+* **Users** who want to DCA out of weakening local currency into BTC and settle back to bank accounts when needed — without P2P counterparty risk.
+* **AI agents** using **MCP** (and **x402**-compatible rails on the roadmap) to move BTC or USDT into **IDR** today and **PHP / VND / THB / INR** next.
+* **Local merchants** accepting Bitcoin but wanting local fiat in an existing bank or e-wallet, without running swap infra.
+* **Apps and wallets** that want a single `createOfframpOrder` instead of wiring Boltz, LiFi, IDRX redeem, and payout APIs themselves.
 
 {% hint style="success" %}
-If you've ever thought "I just want to send sats and have a known amount of local fiat land in a named bank account, with a receipt", that's exactly what PaySats is.
+**Bank of AI** solves agent identity and on-chain payments. **PaySats** is the missing last-mile layer that gets those flows into **IDR** today — and into the rest of Southeast Asia plus **India** next.
 {% endhint %}
 
 ## How we stay out of the risky zone
 
-* **No anonymous inbound cash to your account.** Settlement originates from **licensed redeem partners** (IDRX in Indonesia, INR-pegged partners next), not from anonymous P2P senders, which is what triggers bank-side freezes in the first place.
-* **Every leg has an on-chain or ledger reference.** Lightning payment hash → USDT tx → stablecoin burn tx → redeem ID → bank reference. See [Example end-to-end flow](../reference/example-flow.md).
+* **No anonymous inbound cash to your account.** Settlement originates from **licensed redeem partners** (IDRX in Indonesia; local stablecoin partners in each new market), not from anonymous P2P senders.
+* **Every leg has an on-chain or ledger reference.** See [Example end-to-end flow](../reference/example-flow.md). Lightning-specific proof paths: [Tether Lightning rails](../integrations/tether-lightning.md).
 * **Operator funds move through TWDK smart accounts** with clear per-chain safe addresses. See [Deposit rails](../developers/deposit-rails.md).
 * **Redacted by default.** Recipient bank account numbers and holder names are stripped from logs; only the tenant that created the order can retrieve it via the API.
 
-Next: [How it works](how-it-works.md) · [Quickstart](../getting-started/quickstart.md)
+Next: [Product primitives](primitives.md) · [How it works](how-it-works.md) · [Settlement quickstart](../getting-started/quickstart.md)

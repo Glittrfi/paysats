@@ -1,43 +1,95 @@
 ---
 description: >-
-  High-level view of how a BTC payment becomes local fiat on a bank account or
-  e-wallet. Internals are intentionally locked at this stage.
+  How PaySats primitives work: DCA, BTC-backed borrowing, and live bank
+  settlement from Bitcoin to Southeast Asian fiat.
 icon: diagram-project
 ---
 
 # How it works
 
 {% hint style="info" %}
-This page is intentionally a **high-level overview**. Internal routing, fee policy, liquidity pool layout, and provider-level detail are locked at this stage, deeper developer material will be published as PaySats matures.
+This page is a **high-level overview** of all three [product primitives](primitives.md). Routing detail, fee policy, and provider-level internals are intentionally locked at this stage.
 {% endhint %}
 
-## End-to-end, in one picture
+## Three primitives overview
+
+| Primitive | One-line | Status |
+|-----------|----------|--------|
+| **Agentic DCA into BTC** | Scheduled or agent-triggered conversion from local fiat into BTC on BNB Chain | Roadmap |
+| **BTC-backed borrowing** | Lock BTC collateral; borrow local stablecoins (e.g. IDRX) | Roadmap |
+| **Bank settlement** | On-chain value → named bank / e-wallet via licensed redeem partners | **Live (IDR)** |
+
+The sections below describe **intended** flows for DCA and borrowing, then the **live** settlement primitive in full detail.
+
+## DCA primitive (roadmap)
+
+```mermaid
+flowchart LR
+  agent[User or AI agent]
+  local[Local fiat or stablecoin]
+  bnb[BNB Chain]
+  btc[BTC / BTCB]
+
+  agent -->|recurring or triggered| local
+  local --> bnb
+  bnb --> btc
+```
+
+* Agent or user sets amount and cadence in local currency.
+* PaySats executes swaps on **BNB Chain** into **BTC** or **BTCB**.
+* Agents invoke DCA via **MCP** / **x402** (roadmap) without manual babysitting.
+
+No public DCA API is available yet. **BTCB** deposit rails on BNB are already live for settlement — see [Supported rails](supported-rails.md).
+
+## Borrowing primitive (roadmap)
+
+```mermaid
+flowchart LR
+  btc[BTC / BTCB collateral]
+  bnb[BNB Chain]
+  idrx[IDRX or local stablecoin]
+  bank[Optional bank payout]
+
+  btc --> bnb
+  bnb --> idrx
+  idrx --> bank
+```
+
+* User locks **BTC** (or **BTCB**) as collateral.
+* PaySats routes a borrow leg into **IDRX** or market-specific stablecoins.
+* Borrowed stablecoins stay on-chain or flow into the **settlement** primitive for bank payout.
+
+No public borrow API is available yet.
+
+## Settlement primitive (live)
+
+This is what the **SDK**, **HTTP API**, and **MCP server** implement today.
+
+### End-to-end sequence
 
 ```mermaid
 sequenceDiagram
   autonumber
-  actor User as User / merchant
-  participant App as PaySats app or SDK
+  actor User as User / merchant / agent
+  participant App as PaySats app SDK or MCP
   participant API as PaySats API
-  participant Spark as Spark (TWDK Lightning)
-  participant Boltz as Boltz (LN to USDT)
-  participant WDK as TWDK ERC-4337
-  participant Chains as Base / Arb / BNB / Polygon
-  participant Fiat as IDR payout (BCA / e-wallet)
+  participant Deposit as Deposit rail Lightning or EVM
+  participant Swap as Swap and settlement layer
+  participant Fiat as IDR payout BCA or e-wallet
 
-  User->>App: Create order (sats or IDR amount + recipient)
+  User->>App: Create order amount plus recipient
   App->>API: POST /v1/offramp/orders
-  API-->>App: bolt11 invoice (LN) or deposit address (on-chain)
-  User->>Spark: Pay BOLT11
-  Spark-->>Boltz: LN settlement
-  Boltz-->>WDK: USDT on smart account
-  API->>WDK: LiFi / IDRX / burn / redeem
-  WDK->>Chains: USDT to IDRX (routed)
-  API->>Fiat: Bank or e-wallet credit
-  API-->>App: state: COMPLETED
+  API-->>App: BOLT11 or deposit address
+  User->>Deposit: Pay invoice or send on-chain
+  Deposit-->>Swap: Confirmed value
+  API->>Swap: LiFi IDRX burn redeem
+  Swap->>Fiat: Bank or e-wallet credit
+  API-->>App: state COMPLETED
 ```
 
-## The same thing as a flow
+Lightning and **USDT** legs (Boltz, Tether WDK Spark) are documented under [Tether Lightning rails](../integrations/tether-lightning.md) — not repeated here.
+
+### Settlement flow diagram
 
 ```mermaid
 flowchart LR
@@ -58,14 +110,14 @@ flowchart LR
   end
   subgraph payout [IDR out]
     idrx --> bank[BCA and partner banks]
-    idrx --> ewallet[GoPay / OVO / Jago / DANA]
+    idrx --> ewallet[GoPay OVO Jago DANA]
   end
 ```
 
-## The pieces you'll actually touch
+### What you touch as a developer
 
 {% hint style="success" %}
-As a developer you only interact with **one API** and **one SDK call**. Everything in the swap and settlement layer is orchestrated server-side.
+You interact with **one API** and **one SDK call**. Swap and settlement orchestration is server-side.
 {% endhint %}
 
 | Layer | What you do | What PaySats does |
@@ -73,11 +125,11 @@ As a developer you only interact with **one API** and **one SDK call**. Everythi
 | **Quote** | `getBtcIdrQuote()` | Cached BTC/IDR + USDC/IDR rate |
 | **Payout discovery** | `listPayoutMethods()` | Live list of banks + e-wallets with `bankCode` / `bankName` |
 | **Order creation** | `createOfframpOrder({ idrAmount, depositChannel, ... })` | Lock quote, derive deposit target, return BOLT11 or deposit instructions |
-| **Payment** | Payer pays BOLT11 or sends on-chain BTC / cbBTC / BTCB | Server watches invoice / deposit address, starts swap pipeline |
+| **Payment** | Payer pays BOLT11 or sends cbBTC / BTCB | Server watches deposit, starts swap pipeline |
 | **Swap** | (server-side) | LN → USDT via Boltz, or wrapped BTC → IDRX via LiFi |
 | **Settle** | (server-side) | USDT → IDRX, then IDRX burn + redeem |
-| **Payout** | (server-side) | IDRX partner credits BCA bank or e-wallet |
-| **Status** | `getOrder()` or `waitForOrder()` | Deterministic state transitions up to `COMPLETED` / `FAILED` |
+| **Payout** | (server-side) | Partner credits BCA bank or e-wallet |
+| **Status** | `getOrder()` or `waitForOrder()` | State transitions to `COMPLETED` / `FAILED` |
 
 See [Order lifecycle](../developers/order-lifecycle.md) for the full state machine.
 
@@ -85,13 +137,18 @@ See [Order lifecycle](../developers/order-lifecycle.md) for the full state machi
 
 | Area | Status |
 |------|--------|
-| Lightning in → BCA bank out | **Live** |
-| Lightning in → e-wallet out (Jago, GoPay, OVO, ...) | **Live** |
-| cbBTC (Base) in → IDR out | **Live (operator-triggered swap)** |
-| BTCB (BNB Chain) in → IDR out | **Live (operator-triggered swap)** |
-| Native on-chain BTC via Spark deposit addresses | **Wired; integrating in the SDK surface** |
+| **Bank settlement** — Lightning in → BCA bank out | **Live** |
+| **Bank settlement** — Lightning in → e-wallet out | **Live** |
+| **Bank settlement** — cbBTC (Base) in → IDR out | **Live (operator-triggered swap)** |
+| **Bank settlement** — BTCB (BNB Chain) in → IDR out | **Live (operator-triggered swap)** |
+| **Agentic DCA into BTC** | **Planned** |
+| **BTC-backed borrowing (IDRX)** | **Planned** |
+| **PHP / VND / THB bank settlement** | **Planned** |
+| **INR bank settlement** | **Planned** |
+| Native on-chain BTC via Spark deposit addresses | **Wired; integrating in SDK surface** |
 | QRIS ⇄ IDRX full round-trip | **In progress** |
-| Gift cards and e-vouchers (P2P merchant network) | **In progress** |
+| Gift cards and e-vouchers | **In progress** |
+| x402-compatible agent payment rails | **Planned** |
 | Webhooks (push notifications for order state) | **Planned** |
 
-Next: [Supported rails](supported-rails.md) · [Quickstart](../getting-started/quickstart.md)
+Next: [Supported rails](supported-rails.md) · [Product primitives](primitives.md) · [Settlement quickstart](../getting-started/quickstart.md)
