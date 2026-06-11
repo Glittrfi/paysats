@@ -1,13 +1,13 @@
 ---
 description: >-
-  @paysats/mcp — Model Context Protocol server for AI agent last-mile
+  @paysats/mcp: Model Context Protocol server for AI agent last-mile
   settlement: quotes, payout rails, and IDR bank settlement orders.
 icon: plug
 ---
 
 # MCP server: @paysats/mcp
 
-[Model Context Protocol](https://modelcontextprotocol.io) server that wraps `@paysats/sdk` so **AI agents** can perform **last-mile settlement** into Southeast Asian bank accounts — **IDR live today**, PHP / VND / THB / INR expanding. Pairs with agent identity stacks (e.g. Bank of AI); **x402-compatible** payment rails are on the roadmap.
+[Model Context Protocol](https://modelcontextprotocol.io) server that wraps `@paysats/sdk` so **AI agents** can perform **last-mile settlement** into Southeast Asian bank accounts (**IDR live today**, PHP / VND / THB / INR expanding). Pairs with agent identity stacks (e.g. Bank of AI); **x402-compatible** payment rails are on the roadmap.
 
 A connected LLM can:
 

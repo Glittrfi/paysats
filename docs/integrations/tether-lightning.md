@@ -17,9 +17,9 @@ A dedicated Tether product GitBook may ship later; this stub holds the integrati
 
 When you choose `depositChannel: "lightning"` on a settlement order, PaySats uses:
 
-* **Tether WDK Spark** — Lightning invoice creation and settlement.
-* **Boltz** — LN → **USDT** swap onto an operator smart account.
-* **TWDK ERC-4337** safes — USDT routing across EVM chains (Base, Arbitrum, BNB Chain, Polygon) before the IDRX / fiat leg.
+* **Tether WDK Spark:** Lightning invoice creation and settlement.
+* **Boltz:** LN → **USDT** swap onto an operator smart account.
+* **TWDK ERC-4337 safes:** USDT routing across EVM chains (Base, Arbitrum, BNB Chain, Polygon) before the IDRX / fiat leg.
 
 Wrapped BTC paths (`cbbtc`, `btcb`) skip Boltz and route via **LiFi** instead. See [Deposit rails](../developers/deposit-rails.md).
 
@@ -94,6 +94,6 @@ After a Lightning payment, the payer can verify settlement using the invoice and
 
 ## Related
 
-* [How it works — settlement primitive](../introduction/how-it-works.md)
-* [Deposit rails](../developers/deposit-rails.md) — all `depositChannel` values
-* [Example end-to-end flow](../reference/example-flow.md) — worked Lightning → BCA example
+* [How it works: settlement primitive](../introduction/how-it-works.md)
+* [Deposit rails](../developers/deposit-rails.md): all `depositChannel` values
+* [Example end-to-end flow](../reference/example-flow.md): worked Lightning → BCA example

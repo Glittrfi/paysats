@@ -39,7 +39,7 @@ flowchart LR
 * PaySats executes swaps on **BNB Chain** into **BTC** or **BTCB**.
 * Agents invoke DCA via **MCP** / **x402** (roadmap) without manual babysitting.
 
-No public DCA API is available yet. **BTCB** deposit rails on BNB are already live for settlement — see [Supported rails](supported-rails.md).
+No public DCA API is available yet. **BTCB** deposit rails on BNB are already live for settlement; see [Supported rails](supported-rails.md).
 
 ## Borrowing primitive (roadmap)
 
@@ -87,7 +87,7 @@ sequenceDiagram
   API-->>App: state COMPLETED
 ```
 
-Lightning and **USDT** legs (Boltz, Tether WDK Spark) are documented under [Tether Lightning rails](../integrations/tether-lightning.md) — not repeated here.
+Lightning and **USDT** legs (Boltz, Tether WDK Spark) are documented under [Tether Lightning rails](../integrations/tether-lightning.md), not repeated here.
 
 ### Settlement flow diagram
 
@@ -137,10 +137,10 @@ See [Order lifecycle](../developers/order-lifecycle.md) for the full state machi
 
 | Area | Status |
 |------|--------|
-| **Bank settlement** — Lightning in → BCA bank out | **Live** |
-| **Bank settlement** — Lightning in → e-wallet out | **Live** |
-| **Bank settlement** — cbBTC (Base) in → IDR out | **Live (operator-triggered swap)** |
-| **Bank settlement** — BTCB (BNB Chain) in → IDR out | **Live (operator-triggered swap)** |
+| **Bank settlement:** Lightning in → BCA bank out | **Live** |
+| **Bank settlement:** Lightning in → e-wallet out | **Live** |
+| **Bank settlement:** cbBTC (Base) in → IDR out | **Live (operator-triggered swap)** |
+| **Bank settlement:** BTCB (BNB Chain) in → IDR out | **Live (operator-triggered swap)** |
 | **Agentic DCA into BTC** | **Planned** |
 | **BTC-backed borrowing (IDRX)** | **Planned** |
 | **PHP / VND / THB bank settlement** | **Planned** |

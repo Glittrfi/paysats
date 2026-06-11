@@ -15,7 +15,7 @@ Rails power the **bank settlement** primitive today. **DCA** and **BTC-backed bo
 |-----------|------------------|-------|
 | **Bank settlement** | Lightning, cbBTC (Base), BTCB (BNB) → IDR banks / e-wallets | Full API + MCP |
 | **Agentic DCA into BTC** | BTCB on BNB (deposit only) | Swap / schedule API not shipped |
-| **BTC-backed borrowing** | — | Planned on BNB Chain |
+| **BTC-backed borrowing** | (none yet) | Planned on BNB Chain |
 
 ## Markets
 

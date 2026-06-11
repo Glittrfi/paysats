@@ -7,9 +7,9 @@ icon: shield-halved
 
 # Why PaySats
 
-Fiat in Southeast Asia is in a slow bleed against the dollar. **IDR**, **PHP**, **VND**, and **THB** are structurally weaker over time, while **BTC** and dollar stablecoins like **USDC** preserve purchasing power. PaySats exists so users and AI agents can **DCA out of local currency**, **borrow against BTC collateral**, and **settle into named bank accounts** — programmatically, with an audit trail.
+Fiat in Southeast Asia is in a slow bleed against the dollar. **IDR**, **PHP**, **VND**, and **THB** are structurally weaker over time, while **BTC** and dollar stablecoins like **USDC** preserve purchasing power. PaySats exists so users and AI agents can **DCA out of local currency**, **borrow against BTC collateral**, and **settle into named bank accounts**, programmatically, with an audit trail.
 
-Moving value between **Bitcoin** and **local fiat** today is still mostly informal P2P, manual CEX withdrawals, and inbound transfers from strangers. Every step is a risk. PaySats replaces that with three **BNB Chain primitives** — only **bank settlement** is live today; DCA and borrowing are on the roadmap. See [Product primitives](primitives.md).
+Moving value between **Bitcoin** and **local fiat** today is still mostly informal P2P, manual CEX withdrawals, and inbound transfers from strangers. Every step is a risk. PaySats replaces that with three **BNB Chain primitives**. Only **bank settlement** is live today; DCA and borrowing are on the roadmap. See [Product primitives](primitives.md).
 
 The concrete scam and freeze examples below come from our first live market (**Indonesia, IDR**). The same patterns show up across **PHP**, **VND**, **THB**, and **INR** as we expand.
 
@@ -31,7 +31,7 @@ There is **no audit trail**, **no settlement guarantee**, and **no recourse**.
 {% hint style="warning" %}
 **Bank accounts and e-wallets get frozen.**
 
-Local banks and e-wallets routinely **freeze or block accounts** that receive multiple unverified inbound transfers from strangers, which is exactly what a P2P BTC trade looks like to a fraud engine. This is true in Indonesia (BCA, Mandiri, BRI, GoPay, OVO, DANA) and in every market we are expanding into — Philippines, Vietnam, Thailand, and India.
+Local banks and e-wallets routinely **freeze or block accounts** that receive multiple unverified inbound transfers from strangers, which is exactly what a P2P BTC trade looks like to a fraud engine. This is true in Indonesia (BCA, Mandiri, BRI, GoPay, OVO, DANA) and in every market we are expanding into: Philippines, Vietnam, Thailand, and India.
 
 Typical triggers:
 
@@ -89,13 +89,13 @@ A merchant or agent moving BTC to local fiat has no consistent way to prove whic
 
 ## Who PaySats is for
 
-* **Users** who want to DCA out of weakening local currency into BTC and settle back to bank accounts when needed — without P2P counterparty risk.
+* **Users** who want to DCA out of weakening local currency into BTC and settle back to bank accounts when needed, without P2P counterparty risk.
 * **AI agents** using **MCP** (and **x402**-compatible rails on the roadmap) to move BTC or USDT into **IDR** today and **PHP / VND / THB / INR** next.
 * **Local merchants** accepting Bitcoin but wanting local fiat in an existing bank or e-wallet, without running swap infra.
 * **Apps and wallets** that want a single `createOfframpOrder` instead of wiring Boltz, LiFi, IDRX redeem, and payout APIs themselves.
 
 {% hint style="success" %}
-**Bank of AI** solves agent identity and on-chain payments. **PaySats** is the missing last-mile layer that gets those flows into **IDR** today — and into the rest of Southeast Asia plus **India** next.
+**Bank of AI** solves agent identity and on-chain payments. **PaySats** is the missing last-mile layer that gets those flows into **IDR** today, and into the rest of Southeast Asia plus **India** next.
 {% endhint %}
 
 ## How we stay out of the risky zone

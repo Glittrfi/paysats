@@ -7,7 +7,7 @@ icon: rocket
 
 # Settlement quickstart
 
-Go from nothing to **IDR landed in a BCA account** in five steps. This guide covers the **bank settlement** primitive — the live PaySats primitive today. See [Product primitives](../introduction/primitives.md) for DCA and borrowing (roadmap).
+Go from nothing to **IDR landed in a BCA account** in five steps. This guide covers the **bank settlement** primitive, the live PaySats primitive today. See [Product primitives](../introduction/primitives.md) for DCA and borrowing (roadmap).
 
 {% hint style="info" %}
 All SDK calls happen **server-side**. Never expose `PAYSATS_API_KEY` in a browser bundle.

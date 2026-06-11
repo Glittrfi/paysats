@@ -1,7 +1,7 @@
 ---
 description: >-
   PaySats. Agentic Bitcoin and stablecoin settlement for Southeast Asia on BNB
-  Chain. DCA into BTC, BTC-backed borrowing, and bank settlement — IDR live.
+  Chain. DCA into BTC, BTC-backed borrowing, and bank settlement, IDR live.
 icon: bolt
 layout:
   width: default
@@ -21,9 +21,9 @@ layout:
 
 # Welcome to PaySats
 
-PaySats is an **agentic Bitcoin and stablecoin settlement app for Southeast Asia**, built on **BNB Chain**. Users and AI agents **DCA into BTC**, **collateralize BTC to borrow local stablecoins** (e.g. IDRX), and **settle directly into bank accounts** — starting with **IDR** in Indonesia, expanding to **PHP**, **VND**, **THB**, and **INR**.
+PaySats is an **agentic Bitcoin and stablecoin settlement app for Southeast Asia**, built on **BNB Chain**. Users and AI agents **DCA into BTC**, **collateralize BTC to borrow local stablecoins** (e.g. IDRX), and **settle directly into bank accounts**, starting with **IDR** in Indonesia, expanding to **PHP**, **VND**, **THB**, and **INR**.
 
-Southeast Asian fiat bleeds slowly against the dollar. BTC and dollar stablecoins like USDC preserve purchasing power. PaySats is the **last-mile settlement layer** that connects on-chain value to named local accounts — via **MCP** today and **x402-compatible** agent rails next.
+Southeast Asian fiat bleeds slowly against the dollar. BTC and dollar stablecoins like USDC preserve purchasing power. PaySats is the **last-mile settlement layer** that connects on-chain value to named local accounts via **MCP** today and **x402-compatible** agent rails next.
 
 ## Three primitives
 
@@ -37,7 +37,7 @@ Full detail: [Product primitives](introduction/primitives.md).
 
 ## Where to next
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Why PaySats</strong></td><td>SEA currency bleed, P2P risk, and the case for trusted programmatic settlement.</td><td><a href="introduction/why-paysats.md">why-paysats.md</a></td></tr><tr><td><strong>Product primitives</strong></td><td>DCA, borrowing, and bank settlement on BNB Chain — live vs roadmap.</td><td><a href="introduction/primitives.md">primitives.md</a></td></tr><tr><td><strong>Settlement quickstart</strong></td><td>Your first IDR bank settlement in five steps using the SDK.</td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>MCP server</strong></td><td>Agent last-mile settlement — quote, list rails, create orders.</td><td><a href="developers/mcp-server.md">mcp-server.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Why PaySats</strong></td><td>SEA currency bleed, P2P risk, and the case for trusted programmatic settlement.</td><td><a href="introduction/why-paysats.md">why-paysats.md</a></td></tr><tr><td><strong>Product primitives</strong></td><td>DCA, borrowing, and bank settlement on BNB Chain: live vs roadmap.</td><td><a href="introduction/primitives.md">primitives.md</a></td></tr><tr><td><strong>Settlement quickstart</strong></td><td>Your first IDR bank settlement in five steps using the SDK.</td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>MCP server</strong></td><td>Agent last-mile settlement: quote, list rails, create orders.</td><td><a href="developers/mcp-server.md">mcp-server.md</a></td></tr></tbody></table>
 
 ## What PaySats does, in one picture
 
@@ -57,9 +57,9 @@ flowchart TB
 
 **Live settlement path (today):**
 
-* **Bitcoin in** — Lightning (see [Tether Lightning rails](integrations/tether-lightning.md)), **cbBTC** on Base, or **BTCB** on BNB Chain.
-* **Stablecoin middle** — IDRX burn / redeem via licensed partners.
-* **IDR out** — BCA and partner banks, or e-wallets (GoPay, OVO, Jago, …).
+* **Bitcoin in:** Lightning (see [Tether Lightning rails](integrations/tether-lightning.md)), **cbBTC** on Base, or **BTCB** on BNB Chain.
+* **Stablecoin middle:** IDRX burn / redeem via licensed partners.
+* **IDR out:** BCA and partner banks, or e-wallets (GoPay, OVO, Jago, …).
 
 ## Developer hub
 

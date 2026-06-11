@@ -10,21 +10,21 @@ icon: cubes
 
 PaySats exposes **three primitives on BNB Chain** for users and AI agents operating across Southeast Asia:
 
-1. **Agentic DCA into BTC** — programmatic, recurring conversion out of weakening local currency into Bitcoin.
-2. **BTC-backed borrowing** — collateralize BTC to borrow local-currency stablecoins (e.g. IDRX).
-3. **Bank settlement** — move value between on-chain wallets and named bank or e-wallet accounts through licensed redeem partners.
+1. **Agentic DCA into BTC:** programmatic, recurring conversion out of weakening local currency into Bitcoin.
+2. **BTC-backed borrowing:** collateralize BTC to borrow local-currency stablecoins (e.g. IDRX).
+3. **Bank settlement:** move value between on-chain wallets and named bank or e-wallet accounts through licensed redeem partners.
 
 ## Why these primitives matter
 
-Southeast Asian currencies — **IDR**, **PHP**, **VND**, and **THB** — are structurally fragile versus the dollar. Over time, holding only local fiat erodes purchasing power. **BTC** and regulated dollar stablecoins like **USDC** tend to preserve it.
+Southeast Asian currencies (**IDR**, **PHP**, **VND**, and **THB**) are structurally fragile versus the dollar. Over time, holding only local fiat erodes purchasing power. **BTC** and regulated dollar stablecoins like **USDC** tend to preserve it.
 
 PaySats is an **agentic Bitcoin and stablecoin settlement app for Southeast Asia**, built on **BNB Chain**. Users and AI agents can:
 
 * **DCA** out of local currency into BTC on a schedule or on agent trigger.
 * **Collateralize** that BTC to borrow IDR-denominated stablecoins such as **IDRX**.
-* **Settle** directly into Indonesian bank accounts and e-wallets — with **PHP**, **VND**, **THB**, and **INR** rails on the roadmap.
+* **Settle** directly into Indonesian bank accounts and e-wallets, with **PHP**, **VND**, **THB**, and **INR** rails on the roadmap.
 
-By porting Privy / **x402** agent payment patterns from Base onto BNB, PaySats lets AI agents autonomously move value from BTC or USDT into local currency — without manual exchange babysitting.
+By porting Privy / **x402** agent payment patterns from Base onto BNB, PaySats lets AI agents autonomously move value from BTC or USDT into local currency without manual exchange babysitting.
 
 ## Status today
 
@@ -54,11 +54,11 @@ flowchart LR
   chain --> fiat
 ```
 
-* **Bank of AI** — agent identity and on-chain payment infrastructure.
-* **PaySats** — the **last-mile settlement layer** that gets agent and user flows into **IDR today**, and into **PHP**, **VND**, **THB**, and **INR** next.
-* **MCP** — live today for quotes, payout discovery, and order creation. **x402-compatible** agent rails are on the roadmap as we port agent work from Base to BNB.
+* **Bank of AI:** agent identity and on-chain payment infrastructure.
+* **PaySats:** the **last-mile settlement layer** that gets agent and user flows into **IDR today**, and into **PHP**, **VND**, **THB**, and **INR** next.
+* **MCP:** live today for quotes, payout discovery, and order creation. **x402-compatible** agent rails are on the roadmap as we port agent work from Base to BNB.
 
-Lightning and USDT settlement legs (Boltz, Tether WDK) are documented separately under [Tether Lightning rails](../integrations/tether-lightning.md) — not the core BNB Chain product identity.
+Lightning and USDT settlement legs (Boltz, Tether WDK) are documented separately under [Tether Lightning rails](../integrations/tether-lightning.md), not the core BNB Chain product identity.
 
 ## Primitive detail
 
@@ -70,7 +70,7 @@ Intended flow:
 * PaySats schedules swaps on BNB Chain into **BTC** or wrapped BTC (**BTCB**).
 * Agents trigger DCA via MCP / x402 without a human sitting on each trade.
 
-No public DCA API is shipped yet. Deposit rails for wrapped BTC on BNB are already live — see [Supported rails](supported-rails.md).
+No public DCA API is shipped yet. Deposit rails for wrapped BTC on BNB are already live; see [Supported rails](supported-rails.md).
 
 ### 2. BTC-backed borrowing (roadmap)
 
@@ -102,6 +102,6 @@ End-to-end architecture: [How it works](how-it-works.md) · Worked example: [Exa
 | Thailand | THB | Planned |
 | India | INR | Planned |
 
-Payout methods are always served live from `GET /v1/payout/methods` — never hard-code bank codes. See [Supported rails](supported-rails.md).
+Payout methods are always served live from `GET /v1/payout/methods`. Never hard-code bank codes. See [Supported rails](supported-rails.md).
 
 Next: [How it works](how-it-works.md) · [Why PaySats](why-paysats.md) · [Settlement quickstart](../getting-started/quickstart.md)
