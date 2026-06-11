@@ -1,13 +1,15 @@
 root: ./
 
 structure:
-  readme: ./README.md
+  readme: ./welcome.md
   summary: ./SUMMARY.md
 
 redirects:
+  README: welcome.md
   sdk: developers/sdk.md
   mcp: developers/mcp-server.md
   api: developers/http-api.md
   quickstart: getting-started/quickstart.md
   tether: integrations/tether-lightning.md
   primitives: introduction/primitives.md
+  developers: developers/overview.md

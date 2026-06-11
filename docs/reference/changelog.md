@@ -13,6 +13,14 @@ Versions follow the npm packages. Breaking changes bump the major. API `/v1` end
 
 {% updates format="full" %}
 {% update date="2026-06-11" %}
+## Docs: welcome.md homepage
+
+* Replaced `docs/README.md` with `docs/welcome.md` as GitBook homepage (`Welcome to PaySats` first in nav).
+* Renamed `developers/README.md` to `developers/overview.md`.
+* Added project GitBook skill at `.cursor/skills/gitbook/SKILL.md`.
+{% endupdate %}
+
+{% update date="2026-06-11" %}
 ## Docs reframe: SEA agentic settlement
 
 * Repositioned PaySats from Lightning off-ramp-only to **three BNB Chain primitives**: agentic DCA into BTC, BTC-backed borrowing, and **bank settlement** (IDR live).

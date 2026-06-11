@@ -2,7 +2,7 @@
 
 ## Introduction
 
-* [Welcome](README.md)
+* [Welcome to PaySats](welcome.md)
 * [Why PaySats](introduction/why-paysats.md)
 * [Product primitives](introduction/primitives.md)
 * [How it works](introduction/how-it-works.md)
@@ -19,7 +19,7 @@
 
 ## Developers
 
-* [Overview](developers/README.md)
+* [Overview](developers/overview.md)
 * [SDK: @paysats/sdk](developers/sdk.md)
 * [MCP server: @paysats/mcp](developers/mcp-server.md)
 * [HTTP API /v1](developers/http-api.md)
