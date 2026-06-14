@@ -31,12 +31,17 @@ export function InvoiceQrDisplay({ bolt11, amountSats, balanceSats, balanceMsat,
       <div className="rounded-control bg-white p-3">
         <QRCode value={bolt11} size={220} level="M" />
       </div>
-      <Button type="button" onClick={copy} className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10">
+      <Button type="button" variant="secondary" onClick={copy}>
         {copied ? "Copied" : "Copy invoice"}
       </Button>
-      <p className="max-h-24 w-full overflow-y-auto break-all text-center text-[10px] leading-relaxed text-paysats-text-muted">
-        {bolt11}
-      </p>
+      <details className="w-full rounded-control border border-paysats-border bg-paysats-surface-muted px-3 py-2 text-left">
+        <summary className="cursor-pointer text-[11px] font-semibold text-paysats-text-muted">
+          Show full invoice
+        </summary>
+        <p className="mt-2 max-h-24 overflow-y-auto break-all font-mono text-[10px] leading-relaxed text-paysats-text-muted">
+          {bolt11}
+        </p>
+      </details>
       {balanceSats != null ? (
         <div className="text-center text-xs text-paysats-text-muted">
           <p className="font-medium text-paysats-text">Operator wallet (NWC_URL)</p>

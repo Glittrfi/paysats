@@ -80,11 +80,7 @@ export function InvoiceFundForm() {
             balanceMsat={balanceMsat}
             walletAlias={walletAlias}
           />
-          <Button
-            type="button"
-            onClick={() => router.push("/scan")}
-            className="border border-paysats-border bg-transparent text-paysats-text"
-          >
+          <Button type="button" variant="ghost" onClick={() => router.push("/scan")}>
             Continue to QRIS scan
           </Button>
         </>

@@ -105,6 +105,7 @@ function OrderPage() {
   const [lightningPaymentPreimage, setLightningPaymentPreimage] = useState<string | null>(null);
   const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [weblnAvailable, setWeblnAvailable] = useState(false);
 
   const paymentSuccessDelayStartedRef = useRef(false);
   const paymentSuccessTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -183,6 +184,11 @@ function OrderPage() {
       }
     };
   }, [orderId]);
+
+  useEffect(() => {
+    const provider = (window as unknown as { webln?: WebLnProvider }).webln;
+    setWeblnAvailable(Boolean(provider));
+  }, []);
 
   // Auto-redirect to receipt on completion
   useEffect(() => {
@@ -267,7 +273,6 @@ function OrderPage() {
                   `/status?orderId=${encodeURIComponent(orderId)}`,
                 )
               }
-              className="gold-gradient"
             >
               View status
             </Button>
@@ -339,12 +344,12 @@ function OrderPage() {
               ) : null}
               <Button
                 type="button"
+                variant="ghost"
                 onClick={() =>
                   router.push(
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="border border-paysats-border bg-transparent text-paysats-text"
               >
                 Order details
               </Button>
@@ -430,7 +435,8 @@ function OrderPage() {
               <Button
                 type="button"
                 loading={invoicePaying}
-                disabled={!bolt11.startsWith("ln")}
+                disabled={!bolt11.startsWith("ln") || !weblnAvailable}
+                variant={weblnAvailable ? "secondary" : "ghost"}
                 onClick={() => {
                   setError("");
                   setInvoicePaying(true);
@@ -444,10 +450,15 @@ function OrderPage() {
                     )
                     .finally(() => setInvoicePaying(false));
                 }}
-                className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10"
               >
                 Pay with Alby (WebLN)
               </Button>
+              {!weblnAvailable ? (
+                <p className="text-center text-[11px] leading-relaxed text-paysats-text-muted">
+                  No WebLN wallet detected — scan the QR or copy the invoice into
+                  Zeus, WoS, or another Lightning app.
+                </p>
+              ) : null}
               {paymentProofHref ? (
                 <a
                   href={paymentProofHref}
@@ -465,7 +476,6 @@ function OrderPage() {
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="gold-gradient"
               >
                 View status
               </Button>
@@ -507,7 +517,6 @@ function OrderPage() {
                     `/status?orderId=${encodeURIComponent(orderId)}`,
                   )
                 }
-                className="gold-gradient"
               >
                 View status
               </Button>

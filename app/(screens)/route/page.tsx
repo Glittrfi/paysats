@@ -191,12 +191,12 @@ function RoutePage() {
           />
           <Button
             type="button"
+            variant="secondary"
             onClick={() => fundViaWebln(fundingBolt11).catch((e) => setFlowError(String(e)))}
-            className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10"
           >
             Pay with WebLN
           </Button>
-          <Button type="button" loading={loadingSwap} onClick={startBoltzSwap} className="gold-gradient">
+          <Button type="button" loading={loadingSwap} onClick={startBoltzSwap}>
             I paid — start Boltz swap
           </Button>
         </div>

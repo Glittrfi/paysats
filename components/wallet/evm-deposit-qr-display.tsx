@@ -85,8 +85,8 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
       </p>
       <Button
         type="button"
+        variant="secondary"
         onClick={() => copy("qr", deposit.qrValue)}
-        className="border border-paysats-accent bg-transparent text-paysats-accent hover:bg-paysats-accent/10"
       >
         {copied === "qr" ? "Copied" : "Copy QR payload"}
       </Button>
@@ -96,8 +96,9 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
         <p className="break-all font-mono text-[11px] text-paysats-text">{deposit.toAddress}</p>
         <Button
           type="button"
+          variant="ghost"
+          className="text-xs"
           onClick={() => copy("addr", deposit.toAddress)}
-          className="w-full border border-paysats-border bg-transparent text-xs text-paysats-text"
         >
           {copied === "addr" ? "Copied" : "Copy address"}
         </Button>
@@ -118,8 +119,9 @@ export function EvmDepositQrDisplay({ deposit, satAmount, idrAmount }: Props) {
         <p className="break-all font-mono text-[11px] text-paysats-text">{deposit.tokenAddress}</p>
         <Button
           type="button"
+          variant="ghost"
+          className="text-xs"
           onClick={() => copy("token", deposit.tokenAddress)}
-          className="w-full border border-paysats-border bg-transparent text-xs text-paysats-text"
         >
           {copied === "token" ? "Copied" : "Copy token contract"}
         </Button>
