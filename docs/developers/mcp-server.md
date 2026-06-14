@@ -53,7 +53,7 @@ Every HTTP deployment **requires** `Authorization: Bearer <PAYSATS_MCP_HTTP_TOKE
 | Variable | Required | Default | Notes |
 |----------|----------|---------|-------|
 | `PAYSATS_API_KEY` | yes | (none) | Tenant API key (`pk_live_...`). See [API keys](../getting-started/api-keys.md). |
-| `PAYSATS_BASE_URL` | no | `https://api.paysats.io` | Point at a self-hosted backend when needed. |
+| `PAYSATS_BASE_URL` | no | `https://api.paysats.exchange` | Point at a self-hosted backend when needed. |
 | `PAYSATS_MCP_TRANSPORT` | no | `stdio` | `stdio` or `http`. |
 | `PAYSATS_MCP_HTTP_TOKEN` | yes for `http` | (none) | Bearer token required by the HTTP transport. |
 | `PAYSATS_MCP_HOST` | no | `127.0.0.1` | Use `0.0.0.0` on Railway / containers. |

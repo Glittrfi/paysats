@@ -26,7 +26,7 @@ import { PaysatsClient } from "@paysats/sdk";
 
 const client = new PaysatsClient({
   apiKey: process.env.PAYSATS_API_KEY!,
-  // baseUrl: "http://localhost:8080", // optional, defaults to https://api.paysats.io
+  // baseUrl: "http://localhost:8080", // optional, defaults to https://api.paysats.exchange
   // timeoutMs: 30_000,                 // optional per-request timeout
   // fetch: customFetch,                // optional fetch override for tests / polyfills
 });
@@ -37,7 +37,7 @@ const client = new PaysatsClient({
 | Option | Type | Default | Notes |
 |--------|------|---------|-------|
 | `apiKey` | `string` | (required) | **Required.** Tenant API key. |
-| `baseUrl` | `string` | `https://api.paysats.io` | Point at a self-hosted backend. |
+| `baseUrl` | `string` | `https://api.paysats.exchange` | Point at a self-hosted backend. |
 | `timeoutMs` | `number` | `30000` | Per-request timeout. |
 | `fetch` | `typeof fetch` | global `fetch` | Override for Node <18 or testing. |
 

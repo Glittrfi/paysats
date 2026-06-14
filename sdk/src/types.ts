@@ -183,7 +183,7 @@ export type WaitForOrderOptions = {
 
 export type PaysatsClientOptions = {
   apiKey: string;
-  /** Defaults to https://api.paysats.io */
+  /** Defaults to https://api.paysats.exchange */
   baseUrl?: string;
   /** Per-request timeout in ms. Defaults to 30000. */
   timeoutMs?: number;

@@ -61,7 +61,7 @@ Latest BTC/IDR and USDC/IDR rates (cached).
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s https://api.paysats.io/v1/quote/btc-idr \
+curl -s https://api.paysats.exchange/v1/quote/btc-idr \
   -H "x-api-key: $PAYSATS_API_KEY"
 ```
 {% endtab %}
@@ -91,7 +91,7 @@ Live list of banks and e-wallets. **Call this before every `POST /v1/offramp/ord
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s https://api.paysats.io/v1/payout/methods \
+curl -s https://api.paysats.exchange/v1/payout/methods \
   -H "x-api-key: $PAYSATS_API_KEY"
 ```
 {% endtab %}
@@ -138,7 +138,7 @@ Configured deposit targets. `configured: false` means the backend has no `WDK_SE
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s https://api.paysats.io/v1/deposit/rails \
+curl -s https://api.paysats.exchange/v1/deposit/rails \
   -H "x-api-key: $PAYSATS_API_KEY"
 ```
 {% endtab %}
@@ -192,7 +192,7 @@ Liquidity / volume display stats.
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s https://api.paysats.io/v1/platform/stats \
+curl -s https://api.paysats.exchange/v1/platform/stats \
   -H "x-api-key: $PAYSATS_API_KEY"
 ```
 {% endtab %}
@@ -222,7 +222,7 @@ Create a new off-ramp order. Pass **either** `satAmount` **or** `idrAmount`.
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s -X POST https://api.paysats.io/v1/offramp/orders \
+curl -s -X POST https://api.paysats.exchange/v1/offramp/orders \
   -H "x-api-key: $PAYSATS_API_KEY" \
   -H "content-type: application/json" \
   -d '{
@@ -300,7 +300,7 @@ Full server-side order record for a specific order. 404 if the order doesn't bel
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s https://api.paysats.io/v1/offramp/orders/ord_01H... \
+curl -s https://api.paysats.exchange/v1/offramp/orders/ord_01H... \
   -H "x-api-key: $PAYSATS_API_KEY"
 ```
 {% endtab %}
@@ -360,7 +360,7 @@ Recent orders for the authenticated tenant, newest first. `limit` defaults to `5
 {% tabs %}
 {% tab title="curl" %}
 ```bash
-curl -s "https://api.paysats.io/v1/offramp/orders?limit=20" \
+curl -s "https://api.paysats.exchange/v1/offramp/orders?limit=20" \
   -H "x-api-key: $PAYSATS_API_KEY"
 ```
 {% endtab %}

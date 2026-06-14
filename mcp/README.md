@@ -52,7 +52,7 @@ Calls run against a held PaySats tenant key on the server. Per-IP rate limiting 
 | Variable | Required | Default | Notes |
 |----------|----------|---------|-------|
 | `PAYSATS_API_KEY` | yes | - | Tenant API key (see backend `key:revoke` / `tenant:create`) |
-| `PAYSATS_BASE_URL` | no | `https://api.paysats.io` | Point at local/self-hosted backend when needed |
+| `PAYSATS_BASE_URL` | no | `https://api.paysats.exchange` | Point at local/self-hosted backend when needed |
 | `PAYSATS_MCP_TRANSPORT` | no | `stdio` | `stdio` or `http` |
 | `PAYSATS_MCP_HTTP_TOKEN` | yes for `http` | - | Bearer token required by the HTTP transport |
 | `PAYSATS_MCP_HOST` | no | `127.0.0.1` | `0.0.0.0` for containers / Railway |

@@ -13,7 +13,7 @@ import {
   isTerminalState,
 } from "./types.js";
 
-const DEFAULT_BASE_URL = "https://api.paysats.io";
+const DEFAULT_BASE_URL = "https://api.paysats.exchange";
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_POLL_MS = 5_000;
 const DEFAULT_WAIT_TIMEOUT_MS = 30 * 60 * 1000;

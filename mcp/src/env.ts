@@ -53,7 +53,7 @@ export function loadEnv(pkg: { name: string; version: string }): AppEnv {
     );
   }
 
-  const baseUrl = (process.env.PAYSATS_BASE_URL ?? "").trim() || "https://api.paysats.io";
+  const baseUrl = (process.env.PAYSATS_BASE_URL ?? "").trim() || "https://api.paysats.exchange";
 
   const httpHost = (process.env.PAYSATS_MCP_HOST ?? "").trim() || "127.0.0.1";
   const httpPort = readInt(

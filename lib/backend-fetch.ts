@@ -5,7 +5,7 @@
 const NGROK_SKIP_HEADER = "ngrok-skip-browser-warning" as const;
 
 export const BACKEND_URL = (
-  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080"
+  process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.paysats.exchange"
 ).replace(/\/$/, "");
 
 function isNgrokBackendUrl(): boolean {
